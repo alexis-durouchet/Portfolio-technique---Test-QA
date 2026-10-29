@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,10 +13,14 @@
     <title>Squash TM — Portfolio QA</title>
 
     <!-- Feuille de style -->
-    <link rel="stylesheet" href="../../css/squash.css">
+    <link rel="stylesheet" href="index.css">
 
-    <!-- Script de la démonstration -->
-    <script src="../../js/squash.js" defer></script>
+    <!-- Traductions de la démonstration -->
+    <script src="traductions.js" defer></script>
+
+    <!-- Fonctionnement de la démonstration -->
+    <script src="index.js" defer></script>
+
 </head>
 
 <body>
@@ -38,16 +41,14 @@
                         id="bouton-fr"
                         class="actif"
                         aria-pressed="true"
-                        lang="fr"
-                        onclick="changerLangue('fr')">
+                        lang="fr">
                     FR
                 </button>
 
                 <button type="button"
                         id="bouton-en"
                         aria-pressed="false"
-                        lang="en"
-                        onclick="changerLangue('en')">
+                        lang="en">
                     EN
                 </button>
 
@@ -78,36 +79,31 @@
             <button type="button"
                     data-module="ARBO"
                     class="actif"
-                    aria-pressed="true"
-                    onclick="choisirModule('ARBO')">
+                    aria-pressed="true">
                 🏠 Arborescence
             </button>
 
             <button type="button"
                     data-module="AUTH"
-                    aria-pressed="false"
-                    onclick="choisirModule('AUTH')">
+                    aria-pressed="false">
                 Authentification
             </button>
 
             <button type="button"
                     data-module="CAT"
-                    aria-pressed="false"
-                    onclick="choisirModule('CAT')">
+                    aria-pressed="false">
                 Catalogue
             </button>
 
             <button type="button"
                     data-module="PAN"
-                    aria-pressed="false"
-                    onclick="choisirModule('PAN')">
+                    aria-pressed="false">
                 Panier
             </button>
 
             <button type="button"
                     data-module="CMD"
-                    aria-pressed="false"
-                    onclick="choisirModule('CMD')">
+                    aria-pressed="false">
                 Commande
             </button>
 
@@ -137,4 +133,3 @@
 
 </body>
 </html>
-
