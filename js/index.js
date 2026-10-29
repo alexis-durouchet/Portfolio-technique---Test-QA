@@ -32,14 +32,77 @@ const outils = [
 ];
 
 /* ==================================================
-   2. ÉTAT DE LA DÉMONSTRATION
+   2. ÉTAT DU PORTFOLIO
    ================================================== */
 
-// Bouton ayant ouvert la démonstration
+let langueActuelle = "fr";
 let boutonOrigine = null;
+let demonstrationActuelle = null;
 
 /* ==================================================
-   3. GÉNÉRATION DES BOUTONS
+   3. GESTION DES TRADUCTIONS
+   ================================================== */
+
+function changerLangue(langue) {
+
+    if (!traductions[langue]) {
+        return;
+    }
+
+    langueActuelle = langue;
+
+    // Traduction des textes de la page
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const cle = element.dataset.i18n;
+        const texte = traductions[langue][cle];
+
+        if (texte !== undefined) {
+            element.textContent = texte;
+        }
+    });
+
+    // Mise à jour de la langue du document
+    document.documentElement.lang = langue;
+
+    // Mise à jour du titre de l'onglet
+    document.title = traductions[langue].titre;
+
+    // Mise à jour des boutons du sélecteur
+    document.querySelectorAll("[data-lang]").forEach(bouton => {
+        const estActif = bouton.dataset.lang === langue;
+
+        bouton.setAttribute("aria-pressed", String(estActif));
+    });
+
+    // Traduction des intitulés accessibles
+    document.querySelector(".selecteur-langue")
+        ?.setAttribute("aria-label", traductions[langue].choixLangue);
+
+    document.getElementById("liste-langages")
+        ?.setAttribute("aria-label", traductions[langue].listeLangages);
+
+    document.getElementById("liste-outils")
+        ?.setAttribute("aria-label", traductions[langue].listeOutils);
+
+    // Mise à jour de l'iframe si elle est ouverte
+    const iframe = document.getElementById("iframe-demonstration");
+
+    if (iframe) {
+        iframe.title = demonstrationActuelle
+            ? traductions[langue].demonstration + " : " + demonstrationActuelle.nom
+            : traductions[langue].iframeTitre;
+    }
+
+    // Mémorisation du choix
+    try {
+        localStorage.setItem("languePortfolio", langue);
+    } catch (erreur) {
+        // Le site reste utilisable si le stockage est indisponible.
+    }
+}
+
+/* ==================================================
+   4. GÉNÉRATION DES BOUTONS
    ================================================== */
 
 function genererBoutons(elements, identifiantConteneur) {
@@ -49,7 +112,6 @@ function genererBoutons(elements, identifiantConteneur) {
         return;
     }
 
-    // Nettoyage du conteneur avant génération
     conteneur.replaceChildren();
 
     elements.forEach(element => {
@@ -58,8 +120,6 @@ function genererBoutons(elements, identifiantConteneur) {
         bouton.type = "button";
         bouton.className = "bouton-demonstration";
         bouton.textContent = element.nom;
-
-        // Activation selon la configuration
         bouton.disabled = !element.actif;
 
         if (element.actif) {
@@ -73,7 +133,7 @@ function genererBoutons(elements, identifiantConteneur) {
 }
 
 /* ==================================================
-   4. OUVERTURE DE LA DÉMONSTRATION
+   5. OUVERTURE DE LA DÉMONSTRATION
    ================================================== */
 
 function ouvrirDemonstration(element, bouton) {
@@ -86,18 +146,15 @@ function ouvrirDemonstration(element, bouton) {
         return;
     }
 
-    // Mémorisation du bouton d'origine
     boutonOrigine = bouton;
+    demonstrationActuelle = element;
 
-    // Mise à jour du contenu
     titre.textContent = element.nom;
-    iframe.title = "Démonstration : " + element.nom;
+    iframe.title = traductions[langueActuelle].demonstration + " : " + element.nom;
     iframe.src = element.page;
 
-    // Affichage de la zone
     zone.hidden = false;
 
-    // Défilement vers la démonstration
     zone.scrollIntoView({
         behavior: "smooth",
         block: "start"
@@ -105,10 +162,8 @@ function ouvrirDemonstration(element, bouton) {
 }
 
 /* ==================================================
-   5. NAVIGATION DE LA DÉMONSTRATION
+   6. NAVIGATION DE LA DÉMONSTRATION
    ================================================== */
-
-/* ===== Retour en haut ===== */
 
 function retourEnHaut() {
     document.getElementById("accueil")?.scrollIntoView({
@@ -116,8 +171,6 @@ function retourEnHaut() {
         block: "start"
     });
 }
-
-/* ===== Fermeture de la démonstration ===== */
 
 function fermerDemonstration() {
     const zone = document.getElementById("demonstration");
@@ -127,13 +180,9 @@ function fermerDemonstration() {
         return;
     }
 
-    // Masquage de la zone
     zone.hidden = true;
-
-    // Arrêt du contenu de l'iframe
     iframe.removeAttribute("src");
 
-    // Retour au bouton ayant ouvert la démonstration
     if (boutonOrigine) {
         boutonOrigine.focus();
 
@@ -144,23 +193,41 @@ function fermerDemonstration() {
     }
 
     boutonOrigine = null;
+    demonstrationActuelle = null;
 }
 
 /* ==================================================
-   6. INITIALISATION
+   7. INITIALISATION
    ================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Génération des boutons Langages et Outils
+    // Génération des boutons
     genererBoutons(langages, "liste-langages");
     genererBoutons(outils, "liste-outils");
 
-    // Navigation de la démonstration
+    // Sélecteur de langue
+    document.querySelectorAll("[data-lang]").forEach(bouton => {
+        bouton.addEventListener("click", () => {
+            changerLangue(bouton.dataset.lang);
+        });
+    });
+
+    // Restauration de la langue mémorisée
+    let langueEnregistree = "fr";
+
+    try {
+        langueEnregistree = localStorage.getItem("languePortfolio") || "fr";
+    } catch (erreur) {
+        // Français par défaut.
+    }
+
+    changerLangue(langueEnregistree);
+
+    // Navigation de l'iframe
     document.getElementById("retour-haut")
         ?.addEventListener("click", retourEnHaut);
 
     document.getElementById("fermer-demonstration")
         ?.addEventListener("click", fermerDemonstration);
-
 });
