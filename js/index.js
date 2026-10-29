@@ -1,7 +1,8 @@
+
 "use strict";
 
 /* ==================================================
-   CONFIGURATION DES BOUTONS
+   1. CONFIGURATION DES BOUTONS
    true  = bouton activé
    false = bouton désactivé
    ================================================== */
@@ -23,7 +24,7 @@ const outils = [
     { nom: "Robot Framework", actif: false, page: "outils-tools/robot-framework/index.html" },
     { nom: "Katalon", actif: false, page: "outils-tools/katalon/index.html" },
     { nom: "Cucumber / BDD", actif: false, page: "outils-tools/cucumber/index.html" },
-    { nom: "Squash TM", actif: false, page: "outils-tools/squash/index.html" },
+    { nom: "Squash TM", actif: true, page: "outils-tools/squash/index.html" },
     { nom: "Mantis", actif: false, page: "outils-tools/mantis/index.html" },
     { nom: "Jira / Xray", actif: false, page: "outils-tools/jira-xray/index.html" },
     { nom: "Postman", actif: false, page: "outils-tools/postman/index.html" },
@@ -31,10 +32,15 @@ const outils = [
 ];
 
 /* ==================================================
-   FONCTIONNEMENT DES BOUTONS
+   2. ÉTAT DE LA DÉMONSTRATION
    ================================================== */
 
-/* ===== Création des boutons ===== */
+// Bouton ayant ouvert la démonstration
+let boutonOrigine = null;
+
+/* ==================================================
+   3. GÉNÉRATION DES BOUTONS
+   ================================================== */
 
 function genererBoutons(elements, identifiantConteneur) {
     const conteneur = document.getElementById(identifiantConteneur);
@@ -58,7 +64,7 @@ function genererBoutons(elements, identifiantConteneur) {
 
         if (element.actif) {
             bouton.addEventListener("click", () => {
-                ouvrirDemonstration(element.page);
+                ouvrirDemonstration(element, bouton);
             });
         }
 
@@ -66,19 +72,95 @@ function genererBoutons(elements, identifiantConteneur) {
     });
 }
 
-/* ===== Ouverture des démonstrations ===== */
+/* ==================================================
+   4. OUVERTURE DE LA DÉMONSTRATION
+   ================================================== */
 
-function ouvrirDemonstration(page) {
-    // Fonctionnement temporaire :
-    // ouverture directe de la page de démonstration.
-    // Sera remplacé par l'iframe commune du portfolio.
+function ouvrirDemonstration(element, bouton) {
+    const zone = document.getElementById("demonstration");
+    const iframe = document.getElementById("iframe-demonstration");
+    const titre = document.getElementById("titre-demonstration");
 
-    window.location.href = page;
+    if (!zone || !iframe || !titre) {
+        console.error("La zone de démonstration est introuvable.");
+        return;
+    }
+
+    // Mémorisation du bouton d'origine
+    boutonOrigine = bouton;
+
+    // Mise à jour du contenu
+    titre.textContent = element.nom;
+    iframe.title = "Démonstration : " + element.nom;
+    iframe.src = element.page;
+
+    // Affichage de la zone
+    zone.hidden = false;
+
+    // Défilement vers la démonstration
+    zone.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
-/* ===== Initialisation ===== */
+/* ==================================================
+   5. NAVIGATION DE LA DÉMONSTRATION
+   ================================================== */
+
+/* ===== Retour en haut ===== */
+
+function retourEnHaut() {
+    document.getElementById("accueil")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+/* ===== Fermeture de la démonstration ===== */
+
+function fermerDemonstration() {
+    const zone = document.getElementById("demonstration");
+    const iframe = document.getElementById("iframe-demonstration");
+
+    if (!zone || !iframe) {
+        return;
+    }
+
+    // Masquage de la zone
+    zone.hidden = true;
+
+    // Arrêt du contenu de l'iframe
+    iframe.removeAttribute("src");
+
+    // Retour au bouton ayant ouvert la démonstration
+    if (boutonOrigine) {
+        boutonOrigine.focus();
+
+        boutonOrigine.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
+
+    boutonOrigine = null;
+}
+
+/* ==================================================
+   6. INITIALISATION
+   ================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // Génération des boutons Langages et Outils
     genererBoutons(langages, "liste-langages");
     genererBoutons(outils, "liste-outils");
+
+    // Navigation de la démonstration
+    document.getElementById("retour-haut")
+        ?.addEventListener("click", retourEnHaut);
+
+    document.getElementById("fermer-demonstration")
+        ?.addEventListener("click", fermerDemonstration);
+
 });
