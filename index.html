@@ -6,6 +6,7 @@
     <!-- Configuration de la page -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description"
           content="Portfolio technique d'Alexis Durouchet : parcours professionnel, compétences techniques et pratiques du test logiciel.">
 
@@ -18,46 +19,68 @@
     <!-- Feuille de style -->
     <link rel="stylesheet" href="css/index.css">
 
-    <!-- Script principal -->
+    <!-- Traductions puis script principal -->
+    <script src="js/traductions.js" defer></script>
     <script src="js/index.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Contenu principal -->
     <main id="accueil">
+
+        <!-- Sélection de la langue -->
+        <nav class="selecteur-langue" aria-label="Choix de la langue">
+            <button type="button"
+                    lang="fr"
+                    data-lang="fr"
+                    aria-pressed="true">
+                Français
+            </button>
+
+            <button type="button"
+                    lang="en"
+                    data-lang="en"
+                    aria-pressed="false">
+                English
+            </button>
+        </nav>
 
         <!-- En-tête du portfolio -->
         <header class="entete-portfolio">
-            <h1>Alexis Durouchet — Portfolio technique | Test & QA</h1>
 
-            <p class="introduction">
+            <h1 data-i18n="titre">
+                Alexis Durouchet — Portfolio technique | Test & QA
+            </h1>
+
+            <p class="introduction" data-i18n="introduction">
                 Parcours professionnel, compétences techniques et
                 réalisations dans le domaine du test logiciel
                 et de l'assurance qualité.
             </p>
+
         </header>
 
         <!-- Section : Profil -->
         <section id="profil">
-            <h2>Profil</h2>
+            <h2 data-i18n="profil">Profil</h2>
 
             <div class="contenu-bloc">
 
-                <!-- Présentation et formation -->
                 <div class="sous-section-profil">
                     <h3>
                         <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-                        Présentation et formation
+                        <span data-i18n="profilFormationTitre">
+                            Présentation et formation
+                        </span>
                     </h3>
 
-                    <p>
+                    <p data-i18n="profilFormationTexte1">
                         Actuellement en reconversion professionnelle,
                         je suis une formation de testeur logiciel
                         à l'ENI École Informatique.
                     </p>
 
-                    <p>
+                    <p data-i18n="profilFormationTexte2">
                         Je développe mes compétences en conception
                         et exécution de tests, en analyse des anomalies
                         et en assurance qualité, avec pour objectif
@@ -66,18 +89,21 @@
                     </p>
                 </div>
 
-                <!-- Recherche de stage -->
                 <div class="sous-section-profil">
                     <h3>
                         <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-                        Recherche de stage
+                        <span data-i18n="stageTitre">
+                            Recherche de stage
+                        </span>
                     </h3>
 
                     <p>
-                        <strong>Du 11 janvier au 5 mars 2027</strong>
+                        <strong data-i18n="stageDates">
+                            Du 11 janvier au 5 mars 2027
+                        </strong>
                     </p>
 
-                    <p>
+                    <p data-i18n="stageTexte">
                         Je recherche un stage en test logiciel afin
                         d'intégrer une équipe QA, de mettre en pratique
                         mes connaissances et de participer aux activités
@@ -85,21 +111,22 @@
                     </p>
                 </div>
 
-                <!-- Parcours professionnel -->
                 <div class="sous-section-profil">
                     <h3>
                         <i class="fa-solid fa-train" aria-hidden="true"></i>
-                        Parcours professionnel
+                        <span data-i18n="parcoursTitre">
+                            Parcours professionnel
+                        </span>
                     </h3>
 
-                    <p>
+                    <p data-i18n="parcoursTexte1">
                         Mon expérience professionnelle à la SNCF
                         m'a amené à travailler dans un environnement
                         exigeant en matière de respect des procédures,
                         de détection des irrégularités et de traçabilité.
                     </p>
 
-                    <p>
+                    <p data-i18n="parcoursTexte2">
                         Ces expériences m'ont permis de développer
                         une rigueur et un sens de l'observation
                         que je souhaite aujourd'hui mettre au service
@@ -112,16 +139,15 @@
 
         <!-- Section : Langages -->
         <section id="langages">
-            <h2>Langages</h2>
+            <h2 data-i18n="langagesTitre">Langages</h2>
 
             <div class="contenu-bloc">
-                <p>
+                <p data-i18n="langagesTexte">
                     Présentation des langages et technologies étudiés
                     au cours de ma formation, accompagnés progressivement
                     de démonstrations pratiques.
                 </p>
 
-                <!-- Boutons générés par JavaScript -->
                 <div id="liste-langages"
                      class="liste-boutons"
                      aria-label="Langages et technologies">
@@ -131,16 +157,15 @@
 
         <!-- Section : Outils -->
         <section id="outils">
-            <h2>Outils</h2>
+            <h2 data-i18n="outilsTitre">Outils</h2>
 
             <div class="contenu-bloc">
-                <p>
+                <p data-i18n="outilsTexte">
                     Présentation des outils et frameworks utilisés
                     dans le cadre de ma formation au test logiciel,
                     avec des démonstrations de leur utilisation.
                 </p>
 
-                <!-- Boutons générés par JavaScript -->
                 <div id="liste-outils"
                      class="liste-boutons"
                      aria-label="Outils et frameworks QA">
@@ -148,145 +173,126 @@
             </div>
         </section>
 
-        
-<!-- Section : Méthodologie -->
-<section id="methodologie">
-    <h2>Méthodologie</h2>
+        <!-- Section : Méthodologie -->
+        <section id="methodologie">
+            <h2 data-i18n="methodologieTitre">Méthodologie</h2>
 
-    <div class="contenu-bloc">
+            <div class="contenu-bloc">
 
-        <!-- Conception et exécution des tests -->
-        <div class="sous-section-methodologie">
-            <h3>
-                <i class="fa-solid fa-list-check" aria-hidden="true"></i>
-                Conception et exécution des tests
-            </h3>
+                <div class="sous-section-methodologie">
+                    <h3>
+                        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                        <span data-i18n="methodologieTestsTitre">
+                            Conception et exécution des tests
+                        </span>
+                    </h3>
 
-            <p>
-                Dans le cadre de ma formation, j'étudie les différentes
-                étapes du processus de test logiciel : analyse des besoins,
-                conception des cas de test, exécution et suivi des résultats.
-            </p>
+                    <p data-i18n="methodologieTestsTexte1">
+                        Dans le cadre de ma formation, j'étudie les différentes
+                        étapes du processus de test logiciel : analyse des besoins,
+                        conception des cas de test, exécution et suivi des résultats.
+                    </p>
 
-            <p>
-                J'aborde notamment les tests fonctionnels,
-                les tests de non-régression et les tests API.
-            </p>
-        </div>
+                    <p data-i18n="methodologieTestsTexte2">
+                        J'aborde notamment les tests fonctionnels,
+                        les tests de non-régression et les tests API.
+                    </p>
+                </div>
 
-        <!-- Organisation et suivi de la qualité -->
-        <div class="sous-section-methodologie">
-            <h3>
-                <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
-                Organisation et suivi de la qualité
-            </h3>
+                <div class="sous-section-methodologie">
+                    <h3>
+                        <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+                        <span data-i18n="methodologieOrganisationTitre">
+                            Organisation et suivi de la qualité
+                        </span>
+                    </h3>
 
-            <p>
-                Je me familiarise avec les méthodes Agile et Scrum,
-                ainsi qu'avec les pratiques de suivi des anomalies,
-                de documentation et de traçabilité des tests.
-            </p>
-        </div>
+                    <p data-i18n="methodologieOrganisationTexte">
+                        Je me familiarise avec les méthodes Agile et Scrum,
+                        ainsi qu'avec les pratiques de suivi des anomalies,
+                        de documentation et de traçabilité des tests.
+                    </p>
+                </div>
 
-        <!-- Environnement et pratiques techniques -->
-        <div class="sous-section-methodologie">
-            <h3>
-                <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
-                Environnement et pratiques techniques
-            </h3>
+                <div class="sous-section-methodologie">
+                    <h3>
+                        <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+                        <span data-i18n="methodologieTechniqueTitre">
+                            Environnement et pratiques techniques
+                        </span>
+                    </h3>
 
-            <p>
-                Je découvre les principes du DevOps et de
-                l'intégration et du déploiement continus (CI/CD),
-                ainsi que l'utilisation de Git pour le
-                versionnement et le suivi des modifications.
-            </p>
-        </div>
+                    <p data-i18n="methodologieTechniqueTexte">
+                        Je découvre les principes du DevOps et de
+                        l'intégration et du déploiement continus (CI/CD),
+                        ainsi que l'utilisation de Git pour le
+                        versionnement et le suivi des modifications.
+                    </p>
+                </div>
 
-    </div>
-</section>
+            </div>
+        </section>
 
+        <!-- Section : Contact -->
+        <section id="contact">
+            <h2 data-i18n="contactTitre">Contact</h2>
 
-       <!-- Section : Contact -->
-<section id="contact">
-    <h2>Contact</h2>
+            <div class="contenu-bloc">
 
-    <div class="contenu-bloc">
-        <p>
-            Vous souhaitez échanger au sujet de mon parcours,
-            de mes réalisations ou d'une opportunité de stage
-            en test logiciel ? Vous pouvez me contacter
-            via les liens ci-dessous.
-        </p>
+                <p data-i18n="contactTexte">
+                    Vous souhaitez échanger au sujet de mon parcours,
+                    de mes réalisations ou d'une opportunité de stage
+                    en test logiciel ? Vous pouvez me contacter
+                    via les liens ci-dessous.
+                </p>
 
-        <div class="liste-contact">
+                <div class="liste-contact">
+                    <a href="https://github.com/alexis-durouchet"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        GitHub
+                    </a>
 
-            <!-- Profil GitHub -->
-            <a href="https://github.com/alexis-durouchet"
-               target="_blank"
-               rel="noopener noreferrer">
-                <i class="fa-brands fa-github" aria-hidden="true"></i>
-                GitHub
-            </a>
+                    <!-- LinkedIn et e-mail à ajouter ultérieurement -->
+                </div>
 
-            <!-- Profil LinkedIn : lien à compléter -->
-            <!--
-            <a href="URL_LINKEDIN"
-               target="_blank"
-               rel="noopener noreferrer">
-                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                LinkedIn
-            </a>
-            -->
+            </div>
+        </section>
 
-            <!-- Adresse e-mail : à compléter -->
-            <!--
-            <a href="mailto:ADRESSE_EMAIL">
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                E-mail
-            </a>
-            -->
+        <!-- Section : Démonstration interactive -->
+        <section id="demonstration"
+                 class="zone-demonstration"
+                 aria-labelledby="titre-demonstration"
+                 hidden>
 
-        </div>
-    </div>
-</section>
+            <div class="entete-demonstration">
 
-<!-- Section : Démonstration interactive -->
-<section id="demonstration"
-         class="zone-demonstration"
-         aria-labelledby="titre-demonstration"
-         hidden>
+                <h2 id="titre-demonstration">
+                    Démonstration
+                </h2>
 
-    <!-- En-tête de la démonstration -->
-    <div class="entete-demonstration">
+                <div class="commandes-demonstration">
 
-        <h2 id="titre-demonstration">
-            Démonstration
-        </h2>
+                    <button type="button" id="retour-haut">
+                        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+                        <span data-i18n="retourHaut">Retour en haut</span>
+                    </button>
 
-        <!-- Commandes de navigation -->
-        <div class="commandes-demonstration">
-            <button type="button" id="retour-haut">
-                <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-                Retour en haut
-            </button>
+                    <button type="button" id="fermer-demonstration">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        <span data-i18n="fermer">Fermer</span>
+                    </button>
 
-            <button type="button" id="fermer-demonstration">
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                Fermer
-            </button>
-        </div>
+                </div>
+            </div>
 
-    </div>
+            <iframe id="iframe-demonstration"
+                    title="Démonstration technique"
+                    loading="lazy">
+            </iframe>
 
-    <!-- Iframe commune aux langages et outils -->
-    <iframe
-        id="iframe-demonstration"
-        title="Démonstration technique"
-        loading="lazy">
-    </iframe>
-
-</section>
+        </section>
 
     </main>
 
