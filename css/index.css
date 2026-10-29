@@ -292,7 +292,94 @@ main > section h2 {
 
 
 /* ==================================================
-   8. LIENS ET INTERACTIONS
+   8. ZONE DE DÉMONSTRATION
+   ================================================== */
+
+/* Masquage de la démonstration inactive */
+
+.zone-demonstration[hidden] {
+    display: none;
+}
+
+/* En-tête de la démonstration */
+
+.entete-demonstration {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.entete-demonstration h2 {
+    margin: 0;
+}
+
+/* Conteneur des commandes */
+
+.commandes-demonstration {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Boutons de navigation */
+
+.commandes-demonstration button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    color: var(--texte-principal);
+    background-color: var(--fond-bouton);
+
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s,
+                border-color 0.2s;
+}
+
+/* Survol des commandes */
+
+.commandes-demonstration button:hover {
+    background-color: var(--fond-bouton-survol);
+    border-color: var(--accent);
+}
+
+/* Navigation au clavier */
+
+.commandes-demonstration button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Iframe commune aux démonstrations */
+
+#iframe-demonstration {
+    display: block;
+
+    width: 100%;
+    height: 750px;
+
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+
+    background-color: var(--fond-article);
+}
+
+
+/* ==================================================
+   9. LIENS ET INTERACTIONS
    ================================================== */
 
 /* Liens généraux */
@@ -315,7 +402,7 @@ a:focus-visible {
 
 
 /* ==================================================
-   9. RESPONSIVE TABLETTE
+   10. RESPONSIVE TABLETTE
    ================================================== */
 
 @media (max-width: 900px) {
@@ -337,7 +424,7 @@ a:focus-visible {
 
 
 /* ==================================================
-   10. RESPONSIVE MOBILE
+   11. RESPONSIVE MOBILE
    ================================================== */
 
 @media (max-width: 600px) {
@@ -398,11 +485,34 @@ a:focus-visible {
         padding: 9px 14px;
         font-size: 0.9rem;
     }
+
+    /* En-tête de démonstration */
+
+    .entete-demonstration {
+        align-items: flex-start;
+    }
+
+    /* Commandes de démonstration */
+
+    .commandes-demonstration {
+        width: 100%;
+    }
+
+    .commandes-demonstration button {
+        flex: 1;
+        justify-content: center;
+    }
+
+    /* Iframe sur mobile */
+
+    #iframe-demonstration {
+        height: 650px;
+    }
 }
 
 
 /* ==================================================
-   11. ACCESSIBILITÉ
+   12. ACCESSIBILITÉ
    ================================================== */
 
 /* Respect des préférences de mouvement */
@@ -414,7 +524,8 @@ a:focus-visible {
     }
 
     .bouton-demonstration,
-    .liste-contact a {
+    .liste-contact a,
+    .commandes-demonstration button {
         transition: none;
     }
 }
