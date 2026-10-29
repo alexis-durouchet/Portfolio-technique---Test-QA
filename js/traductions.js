@@ -10,7 +10,7 @@ const traductions = {
     /* ===== Français ===== */
 
     fr: {
-        titre: "Alexis Durouchet — Portfolio technique | Test & QA",
+        titre: "Alexis du ROUCHET — Portfolio technique | Test & QA",
         introduction: "Parcours professionnel, compétences techniques et réalisations dans le domaine du test logiciel et de l'assurance qualité.",
 
         profil: "Profil",
@@ -58,7 +58,7 @@ const traductions = {
     /* ===== English ===== */
 
     en: {
-        titre: "Alexis Durouchet — Technical Portfolio | Testing & QA",
+        titre: "Alexis du ROUCHET — Technical Portfolio | Testing & QA",
         introduction: "Professional background, technical skills and projects in software testing and quality assurance.",
 
         profil: "Profile",
