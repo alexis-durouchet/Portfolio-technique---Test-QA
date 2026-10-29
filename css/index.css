@@ -55,7 +55,76 @@ main {
 
 
 /* ==================================================
-   3. EN-TÊTE DU PORTFOLIO
+   3. SÉLECTEUR DE LANGUE
+   ================================================== */
+
+/* Positionnement en haut à droite */
+
+.selecteur-langue {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 24px;
+}
+
+/* Apparence des boutons */
+
+.selecteur-langue button {
+    padding: 8px 14px;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    color: var(--texte-secondaire);
+    background-color: var(--fond-bouton);
+
+    border: 1px solid var(--bordure);
+
+    cursor: pointer;
+}
+
+/* Coins arrondis du groupe */
+
+.selecteur-langue button:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+.selecteur-langue button:last-child {
+    margin-left: -1px;
+    border-radius: 0 6px 6px 0;
+}
+
+/* Langue actuellement sélectionnée */
+
+.selecteur-langue button[aria-pressed="true"] {
+    position: relative;
+    z-index: 1;
+
+    color: var(--texte-principal);
+    background-color: #1f3b5c;
+    border-color: var(--accent);
+}
+
+/* Survol des boutons */
+
+.selecteur-langue button:hover {
+    color: var(--texte-principal);
+}
+
+/* Navigation au clavier */
+
+.selecteur-langue button:focus-visible {
+    position: relative;
+    z-index: 2;
+
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+
+/* ==================================================
+   4. EN-TÊTE DU PORTFOLIO
    ================================================== */
 
 .entete-portfolio {
@@ -82,7 +151,7 @@ main {
 
 
 /* ==================================================
-   4. SECTIONS ET CONTENU COMMUN
+   5. SECTIONS ET CONTENU COMMUN
    ================================================== */
 
 /* Séparation des sections */
@@ -124,7 +193,7 @@ main > section h2 {
 
 
 /* ==================================================
-   5. PROFIL ET MÉTHODOLOGIE
+   6. PROFIL ET MÉTHODOLOGIE
    ================================================== */
 
 /* Sous-sections communes */
@@ -182,7 +251,7 @@ main > section h2 {
 
 
 /* ==================================================
-   6. LANGAGES ET OUTILS
+   7. LANGAGES ET OUTILS
    ================================================== */
 
 /* Conteneur des boutons */
@@ -239,7 +308,7 @@ main > section h2 {
 
 
 /* ==================================================
-   7. CONTACT
+   8. CONTACT
    ================================================== */
 
 /* Conteneur des liens */
@@ -292,7 +361,7 @@ main > section h2 {
 
 
 /* ==================================================
-   8. ZONE DE DÉMONSTRATION
+   9. ZONE DE DÉMONSTRATION
    ================================================== */
 
 /* Masquage de la démonstration inactive */
@@ -379,7 +448,7 @@ main > section h2 {
 
 
 /* ==================================================
-   9. LIENS ET INTERACTIONS
+   10. LIENS ET INTERACTIONS
    ================================================== */
 
 /* Liens généraux */
@@ -402,7 +471,7 @@ a:focus-visible {
 
 
 /* ==================================================
-   10. RESPONSIVE TABLETTE
+   11. RESPONSIVE TABLETTE
    ================================================== */
 
 @media (max-width: 900px) {
@@ -424,7 +493,7 @@ a:focus-visible {
 
 
 /* ==================================================
-   11. RESPONSIVE MOBILE
+   12. RESPONSIVE MOBILE
    ================================================== */
 
 @media (max-width: 600px) {
@@ -438,6 +507,17 @@ a:focus-visible {
 
         border: none;
         border-radius: 0;
+    }
+
+    /* Sélecteur de langue */
+
+    .selecteur-langue {
+        margin-bottom: 20px;
+    }
+
+    .selecteur-langue button {
+        padding: 8px 12px;
+        font-size: 0.8rem;
     }
 
     /* En-tête */
@@ -512,7 +592,7 @@ a:focus-visible {
 
 
 /* ==================================================
-   12. ACCESSIBILITÉ
+   13. ACCESSIBILITÉ
    ================================================== */
 
 /* Respect des préférences de mouvement */
