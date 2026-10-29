@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -260,41 +259,44 @@
             </div>
         </section>
 
-        <!-- Section : Démonstration interactive -->
-        <section id="demonstration"
-                 class="zone-demonstration"
-                 aria-labelledby="titre-demonstration"
-                 hidden>
-
-            <div class="entete-demonstration">
-
-                <h2 id="titre-demonstration">
-                    Démonstration
-                </h2>
-
-                <div class="commandes-demonstration">
-
-                    <button type="button" id="retour-haut">
-                        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-                        <span data-i18n="retourHaut">Retour en haut</span>
-                    </button>
-
-                    <button type="button" id="fermer-demonstration">
-                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-                        <span data-i18n="fermer">Fermer</span>
-                    </button>
-
-                </div>
-            </div>
-
-            <iframe id="iframe-demonstration"
-                    title="Démonstration technique"
-                    loading="lazy">
-            </iframe>
-
-        </section>
-
     </main>
+
+    <!-- Section : Démonstration interactive
+         Placée hors de la colonne principale du portfolio
+         pour permettre un affichage indépendant et plus large. -->
+
+    <section id="demonstration"
+             class="zone-demonstration"
+             aria-labelledby="titre-demonstration"
+             hidden>
+
+        <div class="entete-demonstration">
+
+            <h2 id="titre-demonstration">
+                Démonstration
+            </h2>
+
+            <div class="commandes-demonstration">
+
+                <button type="button" id="retour-haut">
+                    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+                    <span data-i18n="retourHaut">Retour en haut</span>
+                </button>
+
+                <button type="button" id="fermer-demonstration">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    <span data-i18n="fermer">Fermer</span>
+                </button>
+
+            </div>
+        </div>
+
+        <iframe id="iframe-demonstration"
+                title="Démonstration technique"
+                loading="lazy">
+        </iframe>
+
+    </section>
 
 </body>
 </html>
