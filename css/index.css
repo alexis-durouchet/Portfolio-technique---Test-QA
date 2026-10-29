@@ -1,4 +1,3 @@
-
 /* ==================================================
    1. CONFIGURATION GÉNÉRALE
    ================================================== */
@@ -361,8 +360,33 @@ main > section h2 {
 
 
 /* ==================================================
-   9. ZONE DE DÉMONSTRATION
+   9. ZONE DE DÉMONSTRATION INDÉPENDANTE
    ================================================== */
+
+/*
+   La démonstration est située hors du main.
+
+   Elle possède sa propre largeur, indépendante
+   de celle du portfolio principal.
+
+   Largeur maximale : 1200px.
+   Marges latérales : 32px minimum sur ordinateur.
+*/
+
+/* Cadre principal de la démonstration */
+
+.zone-demonstration {
+    width: calc(100% - 64px);
+    max-width: 1200px;
+
+    margin: 32px auto 48px;
+    padding: 32px;
+
+    background-color: var(--fond-article);
+
+    border: 1px solid var(--bordure);
+    border-radius: 10px;
+}
 
 /* Masquage de la démonstration inactive */
 
@@ -382,8 +406,14 @@ main > section h2 {
     margin-bottom: 20px;
 }
 
+/* Titre de la démonstration */
+
 .entete-demonstration h2 {
     margin: 0;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 /* Conteneur des commandes */
@@ -434,11 +464,19 @@ main > section h2 {
 
 /* Iframe commune aux démonstrations */
 
+/*
+   L'iframe utilise toute la largeur disponible
+   dans le nouveau cadre.
+
+   Sa hauteur est augmentée pour améliorer
+   la consultation des fiches et des captures.
+*/
+
 #iframe-demonstration {
     display: block;
 
     width: 100%;
-    height: 750px;
+    height: 850px;
 
     border: 1px solid var(--bordure);
     border-radius: 6px;
@@ -476,6 +514,8 @@ a:focus-visible {
 
 @media (max-width: 900px) {
 
+    /* Portfolio principal */
+
     main {
         width: calc(100% - 32px);
         margin: 16px auto;
@@ -488,6 +528,20 @@ a:focus-visible {
 
     main > section {
         padding: 28px 0;
+    }
+
+    /* Cadre indépendant de démonstration */
+
+    .zone-demonstration {
+        width: calc(100% - 32px);
+        margin: 24px auto 32px;
+        padding: 24px;
+    }
+
+    /* Hauteur de lecture sur tablette */
+
+    #iframe-demonstration {
+        height: 750px;
     }
 }
 
@@ -566,10 +620,30 @@ a:focus-visible {
         font-size: 0.9rem;
     }
 
+    /* Cadre indépendant sur mobile */
+
+    /*
+       On conserve 16px de marge de chaque côté
+       pour éviter que le cadre touche les bords.
+    */
+
+    .zone-demonstration {
+        width: calc(100% - 32px);
+
+        margin: 24px auto 32px;
+        padding: 16px;
+
+        border-radius: 8px;
+    }
+
     /* En-tête de démonstration */
 
     .entete-demonstration {
         align-items: flex-start;
+    }
+
+    .entete-demonstration h2 {
+        font-size: 1.3rem;
     }
 
     /* Commandes de démonstration */
