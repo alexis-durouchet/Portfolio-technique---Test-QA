@@ -1,4 +1,4 @@
-# Alexis Durouchet — Portfolio technique | Test & QA
+# Alexis du ROUCHET — Portfolio technique | Test & QA
 
 Bienvenue sur mon dépôt GitHub.
 
