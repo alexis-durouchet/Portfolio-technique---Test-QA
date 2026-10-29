@@ -1,1 +1,140 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- ==================================================
+         1. CONFIGURATION DE LA PAGE
+         ================================================== -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Squash TM — Portfolio QA</title>
+
+    <!-- Feuille de style -->
+    <link rel="stylesheet" href="../../css/squash.css">
+
+    <!-- Script de la démonstration -->
+    <script src="../../js/squash.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ==================================================
+         2. EN-TÊTE ET SÉLECTEUR DE LANGUE
+         ================================================== -->
+
+    <header>
+        <div class="entete">
+
+            <!-- Sélection Français / English -->
+            <div class="langues"
+                 role="group"
+                 aria-label="Language / Langue">
+
+                <button type="button"
+                        id="bouton-fr"
+                        class="actif"
+                        aria-pressed="true"
+                        lang="fr"
+                        onclick="changerLangue('fr')">
+                    FR
+                </button>
+
+                <button type="button"
+                        id="bouton-en"
+                        aria-pressed="false"
+                        lang="en"
+                        onclick="changerLangue('en')">
+                    EN
+                </button>
+
+            </div>
+
+            <!-- Présentation de la démonstration -->
+            <h1 id="titre-site">
+                Squash TM — Tests fonctionnels
+            </h1>
+
+            <p id="sous-titre">
+                Projet de tests fonctionnels sur le site DemoBlaze
+            </p>
+
+        </div>
+    </header>
+
+    <!-- ==================================================
+         3. CONTENU PRINCIPAL
+         ================================================== -->
+
+    <main>
+
+        <!-- Navigation entre les modules -->
+        <nav id="navigation-modules"
+             aria-label="Modules de test">
+
+            <button type="button"
+                    data-module="ARBO"
+                    class="actif"
+                    aria-pressed="true"
+                    onclick="choisirModule('ARBO')">
+                🏠 Arborescence
+            </button>
+
+            <button type="button"
+                    data-module="AUTH"
+                    aria-pressed="false"
+                    onclick="choisirModule('AUTH')">
+                Authentification
+            </button>
+
+            <button type="button"
+                    data-module="CAT"
+                    aria-pressed="false"
+                    onclick="choisirModule('CAT')">
+                Catalogue
+            </button>
+
+            <button type="button"
+                    data-module="PAN"
+                    aria-pressed="false"
+                    onclick="choisirModule('PAN')">
+                Panier
+            </button>
+
+            <button type="button"
+                    data-module="CMD"
+                    aria-pressed="false"
+                    onclick="choisirModule('CMD')">
+                Commande
+            </button>
+
+        </nav>
+
+        <!-- Navigation des cas de test du module -->
+        <nav id="navigation-tests"
+             aria-label="Cas de test du module sélectionné"
+             hidden>
+        </nav>
+
+        <!-- Affichage des fiches et captures -->
+        <section id="contenu"
+                 class="carte"
+                 aria-live="polite">
+        </section>
+
+    </main>
+
+    <!-- ==================================================
+         4. PIED DE PAGE
+         ================================================== -->
+
+    <footer id="pied-page">
+        Portfolio QA — Tests fonctionnels avec Squash TM
+    </footer>
+
+</body>
+</html>
+
