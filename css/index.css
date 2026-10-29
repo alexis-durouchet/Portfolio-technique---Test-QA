@@ -1,1 +1,72 @@
+/* ===== Configuration générale ===== */
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+/* ===== Contenu principal ===== */
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+/* ===== Blocs du portfolio ===== */
+
+main > section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin-bottom: 24px;
+    padding: 24px;
+
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+}
+
+main > section h1,
+main > section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* ===== Contenu des blocs ===== */
+
+.contenu-bloc {
+    width: 100%;
+    min-height: 80px;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+    main {
+        padding: 16px;
+    }
+
+    main > section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    main > section h1,
+    main > section h2 {
+        font-size: 1.25rem;
+    }
+}
