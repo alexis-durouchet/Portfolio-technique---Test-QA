@@ -51,7 +51,9 @@ function changerLangue(langue) {
 
     langueActuelle = langue;
 
-    // Traduction des textes de la page
+    // Traduction de tous les éléments portant data-i18n.
+    // Cela inclut les nouveaux textes de l'en-tête :
+    // fonctionEntete et accrocheEntete.
     document.querySelectorAll("[data-i18n]").forEach(element => {
         const cle = element.dataset.i18n;
         const texte = traductions[langue][cle];
@@ -84,7 +86,7 @@ function changerLangue(langue) {
     document.getElementById("liste-outils")
         ?.setAttribute("aria-label", traductions[langue].listeOutils);
 
-    // Mise à jour de l'iframe si elle est ouverte
+    // Mise à jour du titre de l'iframe si elle est ouverte
     const iframe = document.getElementById("iframe-demonstration");
 
     if (iframe) {
@@ -93,7 +95,7 @@ function changerLangue(langue) {
             : traductions[langue].iframeTitre;
     }
 
-    // Mémorisation du choix
+    // Mémorisation du choix de langue
     try {
         localStorage.setItem("languePortfolio", langue);
     } catch (erreur) {
@@ -222,6 +224,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Français par défaut.
     }
 
+    // Application de la langue au chargement
     changerLangue(langueEnregistree);
 
     // Navigation de l'iframe
