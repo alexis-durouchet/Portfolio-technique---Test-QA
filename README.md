@@ -30,7 +30,7 @@ Ce portfolio est encore modeste et en cours de construction. Je l'enrichis progr
 ## 🔗 Liens professionnels
 
 - **LinkedIn** — [Consulter mon profil](https://www.linkedin.com/in/alexis-du-rouchet-15ab3a168/)
-- **CV** — [Consulter ou télécharger mon CV](assets/documents/CV%20Alexis%20du%20ROUCHET.pdf)
+- **CV** — [Consulter ou télécharger mon CV](assets/documents/cv-alexis-durouchet.pdf)
 
 ---
 
