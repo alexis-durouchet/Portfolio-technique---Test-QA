@@ -1,1 +1,128 @@
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
 
+    /* Photo et accroche empilées sur mobile */
+
+    .presentation-entete {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 28px;
+    }
+
+    .photo-profil {
+        width: 120px;
+        height: 120px;
+        flex: 0 0 auto;
+    }
+
+    .accroche-entete .fonction-entete {
+        font-size: 1.1rem;
+    }
+
+    /* En-tête */
+
+    .entete-portfolio {
+        padding-bottom: 24px;
+    }
+
+    .entete-portfolio h1 {
+        font-size: 1.5rem;
+    }
+
+    .introduction {
+        font-size: 1rem;
+    }
+
+    /* Sections */
+
+    main > section {
+        padding: 24px 0;
+    }
+
+    main > section h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Boutons Langages et Outils */
+
+    .liste-boutons {
+        gap: 10px;
+    }
+
+    .bouton-demonstration {
+        padding: 9px 14px;
+        font-size: 0.9rem;
+    }
+
+    /* Liens de contact */
+
+    .liste-contact {
+        gap: 10px;
+    }
+
+    .liste-contact a {
+        padding: 9px 14px;
+        font-size: 0.9rem;
+    }
+
+    /* Cadre indépendant sur mobile */
+
+    /*
+       On conserve 16px de marge de chaque côté
+       pour éviter que le cadre touche les bords.
+    */
+
+    .zone-demonstration {
+        width: calc(100% - 32px);
+
+        margin: 24px auto 32px;
+        padding: 16px;
+
+        border-radius: 8px;
+    }
+
+    /* En-tête de démonstration */
+
+    .entete-demonstration {
+        align-items: flex-start;
+    }
+
+    .entete-demonstration h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Commandes de démonstration */
+
+    .commandes-demonstration {
+        width: 100%;
+    }
+
+    .commandes-demonstration button {
+        flex: 1;
+        justify-content: center;
+    }
+
+    /* Iframe sur mobile */
+
+    #iframe-demonstration {
+        height: 650px;
+    }
+}
+
+
+/* ==================================================
+   13. ACCESSIBILITÉ
+   ================================================== */
+
+/* Respect des préférences de mouvement */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .bouton-demonstration,
+    .liste-contact a,
