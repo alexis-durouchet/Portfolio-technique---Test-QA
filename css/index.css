@@ -1,6 +1,500 @@
+/* ==================================================
+   1. CONFIGURATION GÉNÉRALE
+   ================================================== */
 
-    
-  
+:root {
+    --fond-page: #0d1117;
+    --fond-article: #0d1117;
+    --fond-bouton: #21262d;
+    --fond-bouton-survol: #30363d;
+
+    --texte-principal: #f0f6fc;
+    --texte-secondaire: #c9d1d9;
+
+    --bordure: #30363d;
+    --accent: #58a6ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+
+    background-color: var(--fond-page);
+    color: var(--texte-principal);
+}
+
+
+/* ==================================================
+   2. STRUCTURE PRINCIPALE
+   ================================================== */
+
+main {
+    width: calc(100% - 64px);
+    max-width: 1100px;
+
+    margin: 32px auto;
+    padding: 40px 48px;
+
+    background-color: var(--fond-article);
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+}
+
+
+/* ==================================================
+   3. SÉLECTEUR DE LANGUE
+   ================================================== */
+
+/* Positionnement en haut à droite */
+
+.selecteur-langue {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 24px;
+}
+
+/* Apparence des boutons */
+
+.selecteur-langue button {
+    padding: 8px 14px;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    color: var(--texte-secondaire);
+    background-color: var(--fond-bouton);
+
+    border: 1px solid var(--bordure);
+
+    cursor: pointer;
+}
+
+/* Coins arrondis du groupe */
+
+.selecteur-langue button:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+.selecteur-langue button:last-child {
+    margin-left: -1px;
+    border-radius: 0 6px 6px 0;
+}
+
+/* Langue actuellement sélectionnée */
+
+.selecteur-langue button[aria-pressed="true"] {
+    position: relative;
+    z-index: 1;
+
+    color: var(--texte-principal);
+    background-color: #1f3b5c;
+    border-color: var(--accent);
+}
+
+/* Survol des boutons */
+
+.selecteur-langue button:hover {
+    color: var(--texte-principal);
+}
+
+/* Navigation au clavier */
+
+.selecteur-langue button:focus-visible {
+    position: relative;
+    z-index: 2;
+
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+
+/* ==================================================
+   4. EN-TÊTE DU PORTFOLIO
+   ================================================== */
+
+.entete-portfolio {
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--bordure);
+}
+
+/* Photo à gauche et présentation à droite */
+
+.presentation-entete {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+
+    margin-bottom: 32px;
+}
+
+/* Photo de profil */
+
+.photo-profil {
+    display: block;
+
+    width: 140px;
+    height: 140px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Présentation personnelle */
+
+.accroche-entete {
+    flex: 1;
+    min-width: 0;
+}
+
+.accroche-entete p {
+    margin: 0;
+
+    color: var(--texte-secondaire);
+    line-height: 1.6;
+}
+
+/* Intitulé du profil */
+
+.accroche-entete .fonction-entete {
+    margin-bottom: 12px;
+
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    color: var(--texte-principal);
+}
+
+/* Titre principal */
+
+.entete-portfolio h1 {
+    margin: 0 0 16px;
+
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+/* Description sous le titre */
+
+.introduction {
+    max-width: 850px;
+    margin: 0;
+
+    font-size: 1.05rem;
+    color: var(--texte-secondaire);
+}
+
+
+/* ==================================================
+   5. SECTIONS ET CONTENU COMMUN
+   ================================================== */
+
+/* Séparation des sections */
+
+main > section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--bordure);
+}
+
+main > section:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+/* Titres principaux */
+
+main > section h2 {
+    margin: 0 0 16px;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Conteneurs et paragraphes */
+
+.contenu-bloc {
+    width: 100%;
+}
+
+.contenu-bloc p {
+    margin: 0 0 16px;
+    color: var(--texte-secondaire);
+}
+
+.contenu-bloc p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==================================================
+   6. PROFIL ET MÉTHODOLOGIE
+   ================================================== */
+
+/* Sous-sections communes */
+
+.sous-section-profil,
+.sous-section-methodologie {
+    margin-bottom: 32px;
+}
+
+.sous-section-profil:last-child,
+.sous-section-methodologie:last-child {
+    margin-bottom: 0;
+}
+
+/* Titres des sous-sections */
+
+.sous-section-profil h3,
+.sous-section-methodologie h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0 0 16px;
+
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+
+    color: var(--texte-principal);
+}
+
+/* Icônes des sous-sections */
+
+.sous-section-profil h3 i,
+.sous-section-methodologie h3 i {
+    width: 22px;
+    flex-shrink: 0;
+
+    color: var(--accent);
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Paragraphes des sous-sections */
+
+.sous-section-profil p,
+.sous-section-methodologie p {
+    margin-bottom: 12px;
+}
+
+.sous-section-profil p:last-child,
+.sous-section-methodologie p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==================================================
+   7. LANGAGES ET OUTILS
+   ================================================== */
+
+/* Conteneur des boutons */
+
+.liste-boutons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 24px;
+}
+
+/* Apparence des boutons */
+
+.bouton-demonstration {
+    padding: 10px 20px;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    color: var(--texte-principal);
+    background-color: var(--fond-bouton);
+
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s,
+                border-color 0.2s;
+}
+
+/* Survol des boutons activés */
+
+.bouton-demonstration:not(:disabled):hover {
+    background-color: var(--fond-bouton-survol);
+    border-color: var(--accent);
+}
+
+/* Navigation au clavier */
+
+.bouton-demonstration:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Boutons désactivés */
+
+.bouton-demonstration:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+
+/* ==================================================
+   8. CONTACT
+   ================================================== */
+
+/* Conteneur des liens */
+
+.liste-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 24px;
+}
+
+/* Apparence des liens de contact */
+
+.liste-contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 16px;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    color: var(--texte-principal);
+    background-color: var(--fond-bouton);
+
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    transition: background-color 0.2s,
+                border-color 0.2s;
+}
+
+/* Survol des liens de contact */
+
+.liste-contact a:hover {
+    background-color: var(--fond-bouton-survol);
+    border-color: var(--accent);
+    text-decoration: none;
+}
+
+/* Icônes de contact */
+
+.liste-contact a i {
+    color: var(--accent);
+}
+
+
+/* ==================================================
+   9. ZONE DE DÉMONSTRATION INDÉPENDANTE
+   ================================================== */
+
+/*
+   La démonstration est située hors du main.
+
+   Elle possède sa propre largeur, indépendante
+   de celle du portfolio principal.
+
+   Largeur maximale : 1200px.
+   Marges latérales : 32px minimum sur ordinateur.
+*/
+
+/* Cadre principal de la démonstration */
+
+.zone-demonstration {
+    width: calc(100% - 64px);
+    max-width: 1200px;
+
+    margin: 32px auto 48px;
+    padding: 32px;
+
+    background-color: var(--fond-article);
+
+    border: 1px solid var(--bordure);
+    border-radius: 10px;
+}
+
+/* Masquage de la démonstration inactive */
+
+.zone-demonstration[hidden] {
+    display: none;
+}
+
+/* En-tête de la démonstration */
+
+.entete-demonstration {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+/* Titre de la démonstration */
+
+.entete-demonstration h2 {
+    margin: 0;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Conteneur des commandes */
+
+.commandes-demonstration {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Boutons de navigation */
+
+.commandes-demonstration button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    color: var(--texte-principal);
+    background-color: var(--fond-bouton);
+
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+
     cursor: pointer;
 
     transition: background-color 0.2s,
@@ -139,13 +633,13 @@ a:focus-visible {
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
+
         margin-bottom: 28px;
     }
 
     .photo-profil {
         width: 120px;
         height: 120px;
-        flex: 0 0 auto;
     }
 
     .accroche-entete .fonction-entete {
@@ -193,3 +687,75 @@ a:focus-visible {
         gap: 10px;
     }
 
+    .liste-contact a {
+        padding: 9px 14px;
+        font-size: 0.9rem;
+    }
+
+    /* Cadre indépendant sur mobile */
+
+    /*
+       On conserve 16px de marge de chaque côté
+       pour éviter que le cadre touche les bords.
+    */
+
+    .zone-demonstration {
+        width: calc(100% - 32px);
+
+        margin: 24px auto 32px;
+        padding: 16px;
+
+        border-radius: 8px;
+    }
+
+    /* En-tête de démonstration */
+
+    .entete-demonstration {
+        align-items: flex-start;
+    }
+
+    .entete-demonstration h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Commandes de démonstration */
+
+    .commandes-demonstration {
+        width: 100%;
+    }
+
+    .commandes-demonstration button {
+        flex: 1;
+        justify-content: center;
+    }
+
+    /* Iframe sur mobile */
+
+    #iframe-demonstration {
+        height: 650px;
+    }
+}
+
+
+/* ==================================================
+   13. ACCESSIBILITÉ
+   ================================================== */
+
+/* Respect des préférences de mouvement */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .bouton-demonstration,
+    .liste-contact a,
+    .commandes-demonstration button {
+        transition: none;
+    }
+}
+
+/* ==================================================
+   FIN DU FICHIER CSS
+   ================================================== */
