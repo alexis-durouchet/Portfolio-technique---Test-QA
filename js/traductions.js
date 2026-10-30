@@ -11,7 +11,10 @@ const traductions = {
 
     fr: {
         titre: "Alexis du ROUCHET — Portfolio technique | Test & QA",
-        introduction: "Parcours professionnel, compétences techniques et réalisations dans le domaine du test logiciel et de l'assurance qualité.",
+        introduction: "Parcours professionnel, compétences techniques et premières réalisations dans le domaine du test logiciel et de l'assurance qualité.",
+
+        fonctionEntete: "Testeur logiciel junior | QA",
+        accrocheEntete: "En reconversion professionnelle à l'ENI École Informatique. Portfolio personnel encore modeste et en cours de construction, enrichi progressivement au fil de ma formation.",
 
         profil: "Profil",
         profilFormationTitre: "Présentation et formation",
@@ -45,6 +48,7 @@ const traductions = {
 
         contactTitre: "Contact",
         contactTexte: "Vous souhaitez échanger au sujet de mon parcours, de mes réalisations ou d'une opportunité de stage en test logiciel ? Vous pouvez me contacter via les liens ci-dessous.",
+        consulterCV: "Consulter mon CV (PDF)",
 
         retourHaut: "Retour en haut",
         fermer: "Fermer",
@@ -59,7 +63,10 @@ const traductions = {
 
     en: {
         titre: "Alexis du ROUCHET — Technical Portfolio | Testing & QA",
-        introduction: "Professional background, technical skills and projects in software testing and quality assurance.",
+        introduction: "Professional background, technical skills and early projects in software testing and quality assurance.",
+
+        fonctionEntete: "Junior Software Tester | QA",
+        accrocheEntete: "Currently retraining at ENI École Informatique. This personal portfolio is still modest and under development, and I am gradually expanding it as I progress through my training.",
 
         profil: "Profile",
         profilFormationTitre: "Introduction and training",
@@ -93,6 +100,7 @@ const traductions = {
 
         contactTitre: "Contact",
         contactTexte: "Would you like to discuss my background, projects or a software testing internship opportunity? You can contact me using the links below.",
+        consulterCV: "View my CV (PDF)",
 
         retourHaut: "Back to top",
         fermer: "Close",
