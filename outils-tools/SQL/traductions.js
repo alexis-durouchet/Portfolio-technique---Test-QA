@@ -1,1 +1,956 @@
 
+
+/* ==========================================================
+   01 — VARIABLES ET IDENTITÉ VISUELLE
+   ========================================================== */
+
+:root {
+    color-scheme: dark;
+
+    --fond-page: #0d1117;
+    --fond-carte: #161b22;
+    --fond-secondaire: #0f1724;
+    --fond-interactif: #212936;
+
+    --bordure: #30363d;
+    --bordure-active: #388bfd;
+
+    --texte-principal: #e6edf3;
+    --texte-secondaire: #9da7b3;
+    --texte-discret: #7d8590;
+
+    --accent: #58a6ff;
+    --accent-clair: #79c0ff;
+    --accent-fond: rgba(56, 139, 253, 0.12);
+
+    --succes: #3fb950;
+    --succes-fond: rgba(63, 185, 80, 0.10);
+
+    --erreur: #f85149;
+    --erreur-fond: rgba(248, 81, 73, 0.10);
+
+    --rayon: 12px;
+    --rayon-petit: 8px;
+
+    --largeur-maximale: 1200px;
+
+    --transition: 0.2s ease;
+}
+
+
+/* ==========================================================
+   02 — RÉINITIALISATION ET BASE DU DOCUMENT
+   ========================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+
+    background: var(--fond-page);
+    color: var(--texte-principal);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font: inherit;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-clair);
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================================
+   03 — CONTENEUR PRINCIPAL
+   ========================================================== */
+
+.page-sql {
+    width: min(100%, var(--largeur-maximale));
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 32px 28px 24px;
+}
+
+
+/* ==========================================================
+   04 — EN-TÊTE DE LA DÉMONSTRATION
+   ========================================================== */
+
+.entete {
+    margin-bottom: 28px;
+}
+
+.entete-superieur {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.etiquette-projet {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 11px;
+
+    border: 1px solid var(--bordure);
+    border-radius: 999px;
+
+    background: var(--fond-carte);
+    color: var(--accent-clair);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+}
+
+#titre-site {
+    margin: 0 0 8px;
+
+    color: var(--texte-principal);
+
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+#sous-titre {
+    margin: 0;
+
+    color: var(--texte-secondaire);
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   05 — SÉLECTEUR DE LANGUE FR / EN
+   ========================================================== */
+
+.langues {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+    padding: 4px;
+
+    background: var(--fond-carte);
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon-petit);
+}
+
+.bouton-langue {
+    min-width: 42px;
+    padding: 6px 11px;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    background: transparent;
+    color: var(--texte-secondaire);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.bouton-langue:hover {
+    color: var(--texte-principal);
+    background: var(--fond-interactif);
+}
+
+.bouton-langue[aria-pressed="true"] {
+    color: var(--accent-clair);
+    background: var(--accent-fond);
+    border-color: var(--bordure-active);
+}
+
+
+/* ==========================================================
+   06 — NAVIGATION HORIZONTALE DES TROIS MODULES
+   ========================================================== */
+
+.navigation-modules {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.bouton-module {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    min-width: 0;
+    min-height: 62px;
+
+    gap: 12px;
+    padding: 14px 18px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+
+    background: var(--fond-carte);
+    color: var(--texte-secondaire);
+
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.bouton-module:hover {
+    background: var(--fond-interactif);
+    color: var(--texte-principal);
+    border-color: #484f58;
+}
+
+.bouton-module[aria-pressed="true"],
+.bouton-module.actif {
+    background: var(--accent-fond);
+    color: var(--texte-principal);
+    border-color: var(--bordure-active);
+}
+
+.numero-module {
+    flex-shrink: 0;
+
+    color: var(--accent);
+
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+
+/* ==========================================================
+   07 — PRÉSENTATION DU MODULE ACTIF
+   ========================================================== */
+
+.presentation-module {
+    margin-bottom: 22px;
+    padding: 22px 24px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+
+    background: var(--fond-carte);
+}
+
+.presentation-entete {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.numero-section {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 9px;
+
+    border-radius: 6px;
+
+    background: var(--accent-fond);
+    color: var(--accent-clair);
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+#titre-module {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+#description-module {
+    max-width: 900px;
+    margin: 0;
+
+    color: var(--texte-secondaire);
+
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+
+/* ==========================================================
+   08 — NAVIGATION DES CAS D'USAGE SQL
+   ========================================================== */
+
+.navigation-tests {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.bouton-test {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 9px 15px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon-petit);
+
+    background: var(--fond-carte);
+    color: var(--texte-secondaire);
+
+    font-size: 13px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.bouton-test:hover {
+    background: var(--fond-interactif);
+    color: var(--texte-principal);
+}
+
+.bouton-test.actif,
+.bouton-test[aria-pressed="true"] {
+    background: var(--accent-fond);
+    color: var(--accent-clair);
+    border-color: var(--bordure-active);
+}
+
+
+/* ==========================================================
+   09 — CONTENEUR DU CONTENU DYNAMIQUE
+   ========================================================== */
+
+#contenu-principal {
+    min-width: 0;
+}
+
+.carte {
+    min-width: 0;
+    padding: 26px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon);
+
+    background: var(--fond-carte);
+}
+
+.carte h2,
+.carte h3,
+.carte h4 {
+    color: var(--texte-principal);
+    line-height: 1.35;
+}
+
+.carte h2 {
+    margin: 0 0 16px;
+    font-size: 22px;
+}
+
+.carte h3 {
+    margin: 0 0 12px;
+    font-size: 17px;
+}
+
+.carte h4 {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.carte p {
+    margin: 0 0 14px;
+    color: var(--texte-secondaire);
+    line-height: 1.75;
+}
+
+.carte p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==========================================================
+   10 — PRÉSENTATION DE LA BASE ET DES CINQ TABLES
+   ========================================================== */
+
+.grille-presentation {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+
+    gap: 20px;
+    margin-bottom: 26px;
+}
+
+.bloc-presentation,
+.bloc-legende {
+    min-width: 0;
+    padding: 20px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon-petit);
+
+    background: var(--fond-secondaire);
+}
+
+.liste-tables,
+.liste-legende {
+    display: grid;
+    gap: 10px;
+
+    margin: 12px 0 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.liste-tables li,
+.liste-legende li {
+    color: var(--texte-secondaire);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.liste-tables strong,
+.liste-legende strong {
+    color: var(--texte-principal);
+}
+
+.code-inline {
+    padding: 2px 6px;
+
+    border: 1px solid var(--bordure);
+    border-radius: 5px;
+
+    background: var(--fond-interactif);
+    color: var(--accent-clair);
+
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.9em;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================================
+   11 — DIAGRAMME RELATIONNEL
+   ========================================================== */
+
+.section-diagramme {
+    margin-top: 24px;
+}
+
+.entete-section {
+    margin-bottom: 14px;
+}
+
+.entete-section h3 {
+    margin-bottom: 6px;
+}
+
+.entete-section p {
+    margin-bottom: 0;
+}
+
+.lien-diagramme {
+    display: block;
+
+    width: 100%;
+    padding: 14px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon-petit);
+
+    background: #ffffff;
+
+    cursor: zoom-in;
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.lien-diagramme:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-fond);
+}
+
+.image-diagramme {
+    display: block;
+
+    width: 100%;
+    height: auto;
+    max-height: 640px;
+
+    object-fit: contain;
+}
+
+.legende-image {
+    margin-top: 10px !important;
+
+    color: var(--texte-discret) !important;
+
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   12 — CAPTURES DES SCÉNARIOS D'EXTRACTION ET D'INTÉGRITÉ
+   ========================================================== */
+
+.fiche-test {
+    display: grid;
+    gap: 20px;
+}
+
+.entete-test {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 14px;
+}
+
+.identifiant-test {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 10px;
+
+    border: 1px solid var(--bordure-active);
+    border-radius: 6px;
+
+    background: var(--accent-fond);
+    color: var(--accent-clair);
+
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.titre-test {
+    margin: 10px 0 0 !important;
+
+    font-size: 20px !important;
+}
+
+.description-test {
+    max-width: 950px;
+
+    color: var(--texte-secondaire);
+    font-size: 14px;
+}
+
+.bloc-capture {
+    min-width: 0;
+    padding: 16px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon-petit);
+
+    background: var(--fond-secondaire);
+}
+
+.lien-capture {
+    display: block;
+
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+
+    cursor: zoom-in;
+}
+
+.image-capture {
+    display: block;
+
+    width: auto;
+    max-width: 100%;
+    height: auto;
+
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+
+    background: #ffffff;
+}
+
+.lien-capture:hover .image-capture {
+    border-color: var(--accent);
+}
+
+.legende-capture {
+    margin: 12px 0 0 !important;
+
+    color: var(--texte-discret) !important;
+
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   13 — RÉSULTATS ET STATUTS DES TESTS
+   ========================================================== */
+
+.resultat-test {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+    padding: 14px 16px;
+
+    border: 1px solid rgba(63, 185, 80, 0.35);
+    border-radius: var(--rayon-petit);
+
+    background: var(--succes-fond);
+}
+
+.resultat-test p {
+    margin: 0;
+
+    color: var(--texte-principal);
+    font-size: 13px;
+}
+
+.resultat-test strong {
+    color: var(--succes);
+}
+
+.resultat-test.erreur-attendue {
+    border-color: rgba(248, 81, 73, 0.3);
+    background: var(--erreur-fond);
+}
+
+.resultat-test.erreur-attendue strong {
+    color: #ff9b96;
+}
+
+
+/* ==========================================================
+   14 — SECTION DES SCRIPTS SQL
+   ========================================================== */
+
+.section-scripts {
+    margin-top: 28px;
+    padding-top: 24px;
+
+    border-top: 1px solid var(--bordure);
+}
+
+.section-scripts h3 {
+    margin-bottom: 8px;
+}
+
+.grille-scripts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.lien-script {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-width: 0;
+    min-height: 58px;
+
+    gap: 12px;
+    padding: 12px 16px;
+
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon-petit);
+
+    background: var(--fond-secondaire);
+    color: var(--texte-principal);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition);
+}
+
+.lien-script:hover {
+    background: var(--fond-interactif);
+    border-color: var(--bordure-active);
+    color: var(--accent-clair);
+}
+
+.nom-script {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.icone-lien {
+    flex-shrink: 0;
+
+    color: var(--accent);
+
+    font-size: 16px;
+}
+
+
+/* ==========================================================
+   15 — LIENS COMPLÉMENTAIRES ET BOUTONS
+   ========================================================== */
+
+.actions-contenu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.bouton-lien {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 10px 16px;
+
+    border: 1px solid var(--bordure-active);
+    border-radius: var(--rayon-petit);
+
+    background: var(--accent-fond);
+    color: var(--accent-clair);
+
+    font-size: 13px;
+    font-weight: 650;
+
+    transition:
+        background var(--transition),
+        color var(--transition);
+}
+
+.bouton-lien:hover {
+    background: rgba(56, 139, 253, 0.2);
+    color: #ffffff;
+}
+
+
+/* ==========================================================
+   16 — PIED DE PAGE
+   ========================================================== */
+
+.pied-page {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--bordure);
+}
+
+#texte-pied-page {
+    margin: 0;
+
+    color: var(--texte-discret);
+    font-size: 12px;
+}
+
+#lien-depot {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   17 — ADAPTATION AUX ÉCRANS INTERMÉDIAIRES
+   ========================================================== */
+
+@media (max-width: 850px) {
+
+    .page-sql {
+        padding: 24px 18px;
+    }
+
+    .navigation-modules {
+        gap: 8px;
+    }
+
+    .bouton-module {
+        gap: 8px;
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .grille-presentation {
+        grid-template-columns: 1fr;
+    }
+
+    .grille-scripts {
+        grid-template-columns: 1fr;
+    }
+
+    .carte {
+        padding: 20px;
+    }
+
+}
+
+
+/* ==========================================================
+   18 — ADAPTATION AUX MOBILES ET IFRAMES ÉTROITES
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    .page-sql {
+        padding: 18px 12px;
+    }
+
+    .entete {
+        margin-bottom: 22px;
+    }
+
+    .navigation-modules {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .bouton-module {
+        min-height: 48px;
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .presentation-module {
+        padding: 18px;
+    }
+
+    #titre-module {
+        font-size: 19px;
+    }
+
+    .carte {
+        padding: 14px;
+    }
+
+    .bloc-presentation,
+    .bloc-legende {
+        padding: 14px;
+    }
+
+    .bloc-capture {
+        padding: 8px;
+    }
+
+    .navigation-tests {
+        gap: 8px;
+    }
+
+    .bouton-test {
+        flex: 1 1 auto;
+        padding: 8px 12px;
+    }
+
+    .pied-page {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
+
+
+/* ==========================================================
+   19 — ACCESSIBILITÉ : RÉDUCTION DES ANIMATIONS
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+}
