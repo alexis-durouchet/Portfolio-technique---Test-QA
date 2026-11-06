@@ -1,39 +1,69 @@
 
 "use strict";
 
-/* ==========================================================
-   01 — CONFIGURATION GÉNÉRALE DE LA DÉMONSTRATION
-   ========================================================== */
+/* ==================================================
+   1. CONFIGURATION DE LA DÉMONSTRATION SQL
+   ================================================== */
 
-const CONFIG_SQL = {
+/*
+   Organisation actuelle :
+
+   outils-tools/
+       SQL/
+           index.html
+           index.css
+           traductions.js
+           index.js
+
+   assets/
+       SQL/
+           Arbo-diag.png
+           EXT-01.png à EXT-05.png
+           INT-01.png à INT-04.png
+
+   Les chemins des images sont relatifs à index.html.
+*/
+
+const configurationSQL = {
+
+    // Dossier contenant les captures et le diagramme.
+    dossierImages: "../../assets/SQL/",
+
+    // Nom exact du diagramme dans le dépôt.
+    diagramme: "Arbo-diag.png",
 
     // Dépôt principal du portfolio.
     depotPortfolio:
         "https://github.com/alexis-durouchet/Portfolio-technique---Test-QA",
 
-    // Chemin des captures depuis outils-tools/SQL/index.html.
-    dossierImages: "../../assets/SQL/",
+    /*
+       À compléter lorsque les huit scripts SQL
+       seront disponibles sur GitHub.
 
-    // À compléter lorsque le dossier des scripts sera publié.
-    // Exemple : "https://github.com/.../tree/main/sql"
+       Exemple de format :
+       https://github.com/UTILISATEUR/DEPOT/blob/main/sql/
+
+       Ne pas renseigner une adresse approximative.
+    */
     dossierScripts: "",
 
-    // Image de présentation de la structure SQL Server.
-    diagramme: "Arbo-diag.png",
-
-    // Langue utilisée en l'absence de préférence enregistrée.
+    // Langue utilisée si aucune préférence n'existe.
     langueDefaut: "fr"
 
 };
 
 
-/* ==========================================================
-   02 — DÉFINITION DES MODULES ET DES CAS D'USAGE
-   ========================================================== */
+/* ==================================================
+   2. DÉFINITION DES MODULES ET DES SCÉNARIOS
+   ================================================== */
 
-const MODULES_SQL = ["STRUCTURE", "EXTRACTION", "INTEGRITE"];
+const modulesSQL = [
+    "STRUCTURE",
+    "EXTRACTION",
+    "INTEGRITE"
+];
 
-const SCENARIOS_SQL = {
+const scenariosSQL = {
 
     EXTRACTION: [
         "EXT-01",
@@ -52,23 +82,60 @@ const SCENARIOS_SQL = {
 
 };
 
-const SCRIPTS_SQL = [
-    "01_creation_tables.sql",
-    "02_contraintes.sql",
-    "03_jeu_donnees.sql",
-    "04_index.sql",
-    "05_gestion_donnees.sql",
-    "06_extraction_donnees.sql",
-    "07_notions_complementaires.sql",
-    "08_tests_qa.sql"
+
+/* ==================================================
+   3. LISTE DES HUIT SCRIPTS SQL
+   ================================================== */
+
+/*
+   Les noms des fichiers sont conservés ici
+   pour faciliter leur liaison avec GitHub.
+
+   Les clés correspondent à celles définies
+   dans traductions.js.
+*/
+
+const fichiersSQL = [
+    {
+        cle: "creation",
+        nom: "01_creation_tables.sql"
+    },
+    {
+        cle: "contraintes",
+        nom: "02_contraintes.sql"
+    },
+    {
+        cle: "donnees",
+        nom: "03_jeu_donnees.sql"
+    },
+    {
+        cle: "index",
+        nom: "04_index.sql"
+    },
+    {
+        cle: "gestion",
+        nom: "05_gestion_donnees.sql"
+    },
+    {
+        cle: "extraction",
+        nom: "06_extraction_donnees.sql"
+    },
+    {
+        cle: "complementaires",
+        nom: "07_notions_complementaires.sql"
+    },
+    {
+        cle: "tests",
+        nom: "08_tests_qa.sql"
+    }
 ];
 
 
-/* ==========================================================
-   03 — ÉTAT ACTUEL DE L'INTERFACE
-   ========================================================== */
+/* ==================================================
+   4. ÉTAT DE LA DÉMONSTRATION
+   ================================================== */
 
-let langueSQL = CONFIG_SQL.langueDefaut;
+let langueActiveSQL = configurationSQL.langueDefaut;
 
 let moduleActifSQL = "STRUCTURE";
 
@@ -78,38 +145,26 @@ const scenarioActifSQL = {
 };
 
 
-/* ==========================================================
-   04 — RÉCUPÉRATION DES ÉLÉMENTS HTML
-   ========================================================== */
+/* ==================================================
+   5. RÉCUPÉRATION DES ÉLÉMENTS HTML
+   ================================================== */
 
 const elementsSQL = {
 
-    titreSite: document.getElementById("titre-site"),
-    sousTitre: document.getElementById("sous-titre"),
+    boutonFR:
+        document.getElementById("bouton-fr"),
 
-    boutonFR: document.getElementById("bouton-fr"),
-    boutonEN: document.getElementById("bouton-en"),
+    boutonEN:
+        document.getElementById("bouton-en"),
+
+    titreSite:
+        document.getElementById("titre-site"),
+
+    sousTitre:
+        document.getElementById("sous-titre"),
 
     navigationModules:
         document.getElementById("navigation-modules"),
-
-    ongletStructure:
-        document.getElementById("onglet-structure"),
-
-    ongletExtraction:
-        document.getElementById("onglet-extraction"),
-
-    ongletIntegrite:
-        document.getElementById("onglet-integrite"),
-
-    numeroModule:
-        document.getElementById("numero-module-actif"),
-
-    titreModule:
-        document.getElementById("titre-module"),
-
-    descriptionModule:
-        document.getElementById("description-module"),
 
     navigationTests:
         document.getElementById("navigation-tests"),
@@ -117,41 +172,35 @@ const elementsSQL = {
     contenu:
         document.getElementById("contenu"),
 
-    textePiedPage:
-        document.getElementById("texte-pied-page"),
-
-    texteLienDepot:
-        document.getElementById("texte-lien-depot"),
-
-    lienDepot:
-        document.getElementById("lien-depot")
+    piedPage:
+        document.getElementById("pied-page")
 
 };
 
 
-/* ==========================================================
-   05 — FONCTIONS UTILITAIRES
-   ========================================================== */
+/* ==================================================
+   6. FONCTIONS UTILITAIRES
+   ================================================== */
 
-/**
- * Retourne les traductions correspondant à la langue active.
- */
+/*
+   Retourne les traductions de la langue active.
+
+   L'objet traductionsSQL est déclaré dans
+   le fichier traductions.js.
+*/
+
 function obtenirTraductionsSQL() {
-    return traductionsSQL[langueSQL];
+
+    return traductionsSQL[langueActiveSQL];
+
 }
 
 
-/**
- * Construit le chemin vers une image du projet.
- */
-function cheminImageSQL(nomFichier) {
-    return CONFIG_SQL.dossierImages + nomFichier;
-}
+/*
+   Crée un élément HTML avec une classe
+   et un texte facultatifs.
+*/
 
-
-/**
- * Crée un élément HTML avec une classe CSS facultative.
- */
 function creerElementSQL(balise, classe = "", texte = null) {
 
     const element = document.createElement(balise);
@@ -165,82 +214,118 @@ function creerElementSQL(balise, classe = "", texte = null) {
     }
 
     return element;
+
 }
 
 
-/**
- * Ajoute un paragraphe dans un conteneur.
- */
-function ajouterParagrapheSQL(conteneur, texte, classe = "") {
+/*
+   Ajoute un titre à un conteneur.
+*/
 
-    const paragraphe = creerElementSQL("p", classe, texte);
-
-    conteneur.appendChild(paragraphe);
-
-    return paragraphe;
-}
-
-
-/**
- * Ajoute un titre dans un conteneur.
- */
 function ajouterTitreSQL(conteneur, niveau, texte) {
 
-    const titre = creerElementSQL("h" + niveau, "", texte);
+    const titre = creerElementSQL(
+        "h" + niveau,
+        "",
+        texte
+    );
 
     conteneur.appendChild(titre);
 
     return titre;
+
 }
 
 
-/**
- * Construit un lien sécurisé ouvrant une nouvelle page.
- */
-function creerLienSQL(url, classe = "") {
+/*
+   Ajoute un paragraphe à un conteneur.
+*/
+
+function ajouterParagrapheSQL(
+    conteneur,
+    texte,
+    classe = ""
+) {
+
+    const paragraphe = creerElementSQL(
+        "p",
+        classe,
+        texte
+    );
+
+    conteneur.appendChild(paragraphe);
+
+    return paragraphe;
+
+}
+
+
+/*
+   Crée un lien ouvrant une nouvelle page.
+*/
+
+function creerLienSQL(adresse, classe = "") {
 
     const lien = creerElementSQL("a", classe);
 
-    lien.href = url;
+    lien.href = adresse;
     lien.target = "_blank";
     lien.rel = "noopener noreferrer";
 
     return lien;
+
 }
 
 
-/**
- * Vérifie que le chemin GitHub des scripts est configuré.
- */
+/*
+   Construit le chemin d'une image.
+*/
+
+function obtenirCheminImageSQL(nomFichier) {
+
+    return configurationSQL.dossierImages + nomFichier;
+
+}
+
+
+/*
+   Vérifie si le dossier GitHub contenant
+   les scripts SQL a été configuré.
+*/
+
 function scriptsDisponiblesSQL() {
 
-    return (
-        typeof CONFIG_SQL.dossierScripts === "string" &&
-        CONFIG_SQL.dossierScripts.trim() !== ""
-    );
+    return configurationSQL.dossierScripts.trim() !== "";
 
 }
 
 
-/**
- * Construit l'adresse d'un script dans le dépôt GitHub.
- */
-function urlScriptSQL(nomFichier) {
+/*
+   Construit le lien vers un script SQL.
 
-    const dossier = CONFIG_SQL.dossierScripts.replace(/\/+$/, "");
+   Cette fonction n'est utilisée que si
+   dossierScripts a été renseigné.
+*/
+
+function obtenirLienScriptSQL(nomFichier) {
+
+    const dossier =
+        configurationSQL.dossierScripts.replace(/\/+$/, "");
 
     return dossier + "/" + encodeURIComponent(nomFichier);
 
 }
 
 
-/* ==========================================================
-   06 — GESTION DE LA LANGUE
-   ========================================================== */
+/* ==================================================
+   7. GESTION DE LA LANGUE
+   ================================================== */
 
-/**
- * Lit la préférence linguistique enregistrée par le portfolio.
- */
+/*
+   Récupère la langue enregistrée
+   par le portfolio principal.
+*/
+
 function lireLangueSQL() {
 
     try {
@@ -257,56 +342,60 @@ function lireLangueSQL() {
 
     } catch (erreur) {
 
-        // La démonstration reste utilisable si le stockage
-        // local n'est pas disponible.
+        // Le stockage local peut être indisponible.
+        // La langue par défaut sera alors utilisée.
 
     }
 
-    return CONFIG_SQL.langueDefaut;
+    return configurationSQL.langueDefaut;
 
 }
 
 
-/**
- * Enregistre la langue sélectionnée.
- */
+/*
+   Enregistre la langue sélectionnée.
+*/
+
 function enregistrerLangueSQL(langue) {
 
     try {
+
         localStorage.setItem("languePortfolio", langue);
+
     } catch (erreur) {
 
-        // L'enregistrement n'est pas indispensable
-        // au fonctionnement de la démonstration.
+        // L'interface continue de fonctionner
+        // même sans stockage local.
 
     }
 
 }
 
 
-/**
- * Met à jour la langue et réaffiche le contenu actif.
- */
+/*
+   Change la langue de la démonstration.
+*/
+
 function changerLangueSQL(langue) {
 
     if (langue !== "fr" && langue !== "en") {
         return;
     }
 
-    langueSQL = langue;
+    langueActiveSQL = langue;
 
     enregistrerLangueSQL(langue);
 
     document.documentElement.lang = langue;
 
-    afficherInterfaceSQL();
+    afficherDemonstrationSQL();
 
 }
 
 
-/* ==========================================================
-   07 — MISE À JOUR DE L'EN-TÊTE ET DU PIED DE PAGE
-   ========================================================== */
+/* ==================================================
+   8. MISE À JOUR DES TEXTES GÉNÉRAUX
+   ================================================== */
 
 function afficherTextesGenerauxSQL() {
 
@@ -315,47 +404,78 @@ function afficherTextesGenerauxSQL() {
     document.title = t.titreSite;
 
     elementsSQL.titreSite.textContent = t.titreSite;
+
     elementsSQL.sousTitre.textContent = t.sousTitre;
 
-    elementsSQL.ongletStructure.textContent =
-        t.onglets.STRUCTURE;
+    elementsSQL.piedPage.textContent =
+        t.commun.piedPage;
 
-    elementsSQL.ongletExtraction.textContent =
-        t.onglets.EXTRACTION;
+    // État des boutons FR / EN.
 
-    elementsSQL.ongletIntegrite.textContent =
-        t.onglets.INTEGRITE;
-
-    elementsSQL.textePiedPage.textContent =
-        t.piedPage;
-
-    elementsSQL.texteLienDepot.textContent =
-        t.lienDepot;
-
-    elementsSQL.lienDepot.href =
-        CONFIG_SQL.depotPortfolio;
+    elementsSQL.boutonFR.classList.toggle(
+        "actif",
+        langueActiveSQL === "fr"
+    );
 
     elementsSQL.boutonFR.setAttribute(
         "aria-pressed",
-        String(langueSQL === "fr")
+        String(langueActiveSQL === "fr")
+    );
+
+    elementsSQL.boutonEN.classList.toggle(
+        "actif",
+        langueActiveSQL === "en"
     );
 
     elementsSQL.boutonEN.setAttribute(
         "aria-pressed",
-        String(langueSQL === "en")
+        String(langueActiveSQL === "en")
+    );
+
+    // Libellés des trois modules.
+
+    const boutonsModules =
+        elementsSQL.navigationModules.querySelectorAll(
+            "[data-module]"
+        );
+
+    boutonsModules.forEach((bouton) => {
+
+        const module = bouton.dataset.module;
+
+        const numero =
+            String(modulesSQL.indexOf(module) + 1)
+                .padStart(2, "0");
+
+        bouton.textContent =
+            numero + " — " + t.modules[module];
+
+    });
+
+    // Libellés d'accessibilité des navigations.
+
+    elementsSQL.navigationModules.setAttribute(
+        "aria-label",
+        t.navigationModules
+    );
+
+    elementsSQL.navigationTests.setAttribute(
+        "aria-label",
+        t.navigationTests
     );
 
 }
 
 
-/* ==========================================================
-   08 — NAVIGATION ENTRE LES TROIS MODULES
-   ========================================================== */
+/* ==================================================
+   9. NAVIGATION ENTRE LES MODULES
+   ================================================== */
 
-/**
- * Met à jour l'état visuel des boutons de module.
- */
-function actualiserBoutonsModulesSQL() {
+/*
+   Actualise les boutons de navigation.
+*/
+
+function actualiserNavigationModulesSQL() {
 
     const boutons =
         elementsSQL.navigationModules.querySelectorAll(
@@ -379,60 +499,35 @@ function actualiserBoutonsModulesSQL() {
 }
 
 
-/**
- * Affiche le titre et la description du module actif.
- */
-function afficherPresentationModuleSQL() {
+/*
+   Sélectionne un module.
+*/
 
-    const t = obtenirTraductionsSQL();
-
-    const indexModule =
-        MODULES_SQL.indexOf(moduleActifSQL) + 1;
-
-    const numero =
-        String(indexModule).padStart(2, "0");
-
-    const module =
-        t.modules[moduleActifSQL];
-
-    elementsSQL.numeroModule.textContent =
-        t.module + " " + numero;
-
-    elementsSQL.titreModule.textContent =
-        module.titre;
-
-    elementsSQL.descriptionModule.textContent =
-        module.description;
-
-}
-
-
-/**
- * Change de module tout en conservant le scénario
- * sélectionné précédemment dans chaque catégorie.
- */
 function changerModuleSQL(module) {
 
-    if (!MODULES_SQL.includes(module)) {
+    if (!modulesSQL.includes(module)) {
         return;
     }
 
     moduleActifSQL = module;
 
-    afficherInterfaceSQL();
+    afficherDemonstrationSQL();
 
 }
 
 
-/* ==========================================================
-   09 — NAVIGATION ENTRE LES SCÉNARIOS QA
-   ========================================================== */
+/* ==================================================
+   10. NAVIGATION DES SCÉNARIOS QA
+   ================================================== */
 
-/**
- * Construit les boutons EXT-01 à EXT-05
- * ou INT-01 à INT-04 selon le module actif.
- */
-function afficherNavigationTestsSQL() {
+/*
+   Affiche les boutons EXT ou INT.
+
+   Le module STRUCTURE ne possède pas
+   de navigation secondaire.
+*/
+
+function afficherNavigationScenariosSQL() {
 
     const navigation = elementsSQL.navigationTests;
 
@@ -447,28 +542,18 @@ function afficherNavigationTestsSQL() {
 
     navigation.hidden = false;
 
-    const scenarios = SCENARIOS_SQL[moduleActifSQL];
+    const identifiants = scenariosSQL[moduleActifSQL];
 
     const selection =
         scenarioActifSQL[moduleActifSQL];
 
-    const t = obtenirTraductionsSQL();
+    identifiants.forEach((identifiant) => {
 
-    navigation.setAttribute(
-        "aria-label",
-        moduleActifSQL === "EXTRACTION"
-            ? t.tests.navigationExtraction
-            : t.tests.navigationIntegrite
-    );
-
-    scenarios.forEach((identifiant) => {
-
-        const bouton =
-            creerElementSQL(
-                "button",
-                "bouton-test",
-                identifiant
-            );
+        const bouton = creerElementSQL(
+            "button",
+            "",
+            identifiant
+        );
 
         bouton.type = "button";
 
@@ -486,7 +571,7 @@ function afficherNavigationTestsSQL() {
             scenarioActifSQL[moduleActifSQL] =
                 identifiant;
 
-            afficherInterfaceSQL();
+            afficherDemonstrationSQL();
 
         });
 
@@ -497,45 +582,117 @@ function afficherNavigationTestsSQL() {
 }
 
 
-/* ==========================================================
-   10 — PRÉSENTATION DE LA STRUCTURE DE LA BASE
-   ========================================================== */
+/* ==================================================
+   11. MODULE STRUCTURE : PRÉSENTATION DU PROJET
+   ================================================== */
 
-/**
- * Construit la présentation des cinq tables et
- * la légende du diagramme relationnel.
- */
-function creerPresentationBaseSQL(conteneur, t) {
+/*
+   Affiche l'introduction et l'objectif QA.
+*/
 
-    const grille =
-        creerElementSQL("div", "grille-presentation");
-
-    // Bloc gauche : présentation générale.
-
-    const presentation =
-        creerElementSQL("section", "bloc-presentation");
+function creerIntroductionStructureSQL(conteneur, t) {
 
     ajouterTitreSQL(
-        presentation,
+        conteneur,
+        2,
+        t.structure.titre
+    );
+
+    ajouterParagrapheSQL(
+        conteneur,
+        t.structure.introduction
+    );
+
+    const presentation = creerElementSQL(
+        "div",
+        "presentation-base"
+    );
+
+    // Bloc de présentation.
+
+    const blocPresentation = creerElementSQL(
+        "div",
+        "bloc-presentation"
+    );
+
+    ajouterTitreSQL(
+        blocPresentation,
         3,
         t.structure.titrePresentation
     );
 
     ajouterParagrapheSQL(
-        presentation,
-        t.structure.descriptionPresentation
+        blocPresentation,
+        t.structure.presentation
     );
 
     ajouterTitreSQL(
-        presentation,
-        4,
+        blocPresentation,
+        3,
+        t.structure.titreObjectif
+    );
+
+    ajouterParagrapheSQL(
+        blocPresentation,
+        t.structure.objectif
+    );
+
+    // Bloc de légende.
+
+    const blocLegende = creerElementSQL(
+        "div",
+        "bloc-legende"
+    );
+
+    ajouterTitreSQL(
+        blocLegende,
+        3,
+        t.structure.titreLegende
+    );
+
+    const listeLegende =
+        creerElementSQL("ul");
+
+    t.structure.legende.forEach((texte) => {
+
+        const ligne = creerElementSQL(
+            "li",
+            "",
+            texte
+        );
+
+        listeLegende.appendChild(ligne);
+
+    });
+
+    blocLegende.appendChild(listeLegende);
+
+    presentation.appendChild(blocPresentation);
+    presentation.appendChild(blocLegende);
+
+    conteneur.appendChild(presentation);
+
+}
+
+
+/* ==================================================
+   12. MODULE STRUCTURE : LES CINQ TABLES
+   ================================================== */
+
+function creerListeTablesSQL(conteneur, t) {
+
+    ajouterTitreSQL(
+        conteneur,
+        3,
         t.structure.titreTables
     );
 
-    const listeTables =
-        creerElementSQL("ul", "liste-tables");
+    const grille = creerElementSQL(
+        "div",
+        "liste-tables"
+    );
 
-    const nomsTables = [
+    const tables = [
         "Clients",
         "Produits",
         "Commandes",
@@ -543,228 +700,163 @@ function creerPresentationBaseSQL(conteneur, t) {
         "Avis_Clients"
     ];
 
-    nomsTables.forEach((nomTable) => {
+    tables.forEach((nomTable) => {
 
-        const ligne = creerElementSQL("li");
+        const informations =
+            t.structure.tables[nomTable];
 
-        const nom =
-            creerElementSQL("strong", "", nomTable + " : ");
+        const carteTable = creerElementSQL(
+            "div",
+            "table-sql"
+        );
 
-        const description =
-            document.createTextNode(
-                t.structure.tables[nomTable]
-            );
+        const nom = creerElementSQL(
+            "strong",
+            "",
+            informations.titre
+        );
 
-        ligne.appendChild(nom);
-        ligne.appendChild(description);
+        const description = creerElementSQL(
+            "p",
+            "",
+            informations.description
+        );
 
-        listeTables.appendChild(ligne);
+        carteTable.appendChild(nom);
+        carteTable.appendChild(description);
 
-    });
-
-    presentation.appendChild(listeTables);
-
-    // Bloc droit : légende.
-
-    const legende =
-        creerElementSQL("aside", "bloc-legende");
-
-    ajouterTitreSQL(
-        legende,
-        3,
-        t.structure.titreLegende
-    );
-
-    const listeLegende =
-        creerElementSQL("ul", "liste-legende");
-
-    t.structure.legende.forEach((texte) => {
-
-        const ligne =
-            creerElementSQL("li", "", "• " + texte);
-
-        listeLegende.appendChild(ligne);
+        grille.appendChild(carteTable);
 
     });
-
-    legende.appendChild(listeLegende);
-
-    grille.appendChild(presentation);
-    grille.appendChild(legende);
 
     conteneur.appendChild(grille);
 
 }
 
 
-/**
- * Affiche le diagramme et son lien d'agrandissement.
- */
+/* ==================================================
+   13. MODULE STRUCTURE : DIAGRAMME RELATIONNEL
+   ================================================== */
+
 function creerDiagrammeSQL(conteneur, t) {
 
-    const section =
-        creerElementSQL("section", "section-diagramme");
-
-    const entete =
-        creerElementSQL("div", "entete-section");
+    const bloc = creerElementSQL(
+        "div",
+        "bloc-diagramme"
+    );
 
     ajouterTitreSQL(
-        entete,
+        bloc,
         3,
         t.structure.titreDiagramme
     );
 
     ajouterParagrapheSQL(
-        entete,
+        bloc,
         t.structure.descriptionDiagramme
     );
 
-    section.appendChild(entete);
+    const chemin = obtenirCheminImageSQL(
+        configurationSQL.diagramme
+    );
 
-    const chemin =
-        cheminImageSQL(CONFIG_SQL.diagramme);
-
-    const lien =
-        creerLienSQL(chemin, "lien-diagramme");
+    const lien = creerLienSQL(chemin);
 
     lien.setAttribute(
         "aria-label",
-        t.structure.texteAgrandir
+        t.structure.ouvrirDiagramme
     );
 
-    const image =
-        creerElementSQL("img", "image-diagramme");
+    const image = creerElementSQL("img");
 
     image.src = chemin;
-    image.alt = t.structure.altDiagramme;
+    image.alt = t.structure.texteAlternatifDiagramme;
+
     image.loading = "lazy";
     image.decoding = "async";
 
     lien.appendChild(image);
-
-    section.appendChild(lien);
+    bloc.appendChild(lien);
 
     ajouterParagrapheSQL(
-        section,
-        t.structure.texteAgrandir,
-        "legende-image"
+        bloc,
+        t.structure.ouvrirDiagramme,
+        "legende-diagramme"
     );
 
-    conteneur.appendChild(section);
+    conteneur.appendChild(bloc);
 
 }
 
 
-/* ==========================================================
-   11 — PRÉSENTATION DES HUIT SCRIPTS SQL
-   ========================================================== */
+/* ==================================================
+   14. MODULE STRUCTURE : SCRIPTS SQL
+   ================================================== */
 
-/**
- * Construit la section d'accès au code SQL complet.
- *
- * Tant que le dossier GitHub des scripts n'est pas
- * configuré, les noms restent visibles sans faux lien.
- */
-function creerSectionScriptsSQL(conteneur, t) {
+/*
+   Les huit scripts sont présentés avec
+   leur intitulé dans la langue active.
 
-    const section =
-        creerElementSQL("section", "section-scripts");
+   Tant que dossierScripts est vide,
+   les intitulés ne sont pas des liens.
+*/
+
+function creerListeScriptsSQL(conteneur, t) {
 
     ajouterTitreSQL(
-        section,
+        conteneur,
         3,
         t.structure.titreScripts
     );
 
     ajouterParagrapheSQL(
-        section,
+        conteneur,
         t.structure.descriptionScripts
     );
 
-    const grille =
-        creerElementSQL("div", "grille-scripts");
+    const grille = creerElementSQL(
+        "div",
+        "liste-scripts"
+    );
 
-    SCRIPTS_SQL.forEach((nomFichier) => {
+    fichiersSQL.forEach((fichier) => {
 
         const disponible = scriptsDisponiblesSQL();
 
-        const element = disponible
-            ? creerLienSQL(
-                urlScriptSQL(nomFichier),
+        let element;
+
+        if (disponible) {
+
+            element = creerLienSQL(
+                obtenirLienScriptSQL(fichier.nom),
                 "lien-script"
-            )
-            : creerElementSQL(
+            );
+
+        } else {
+
+            element = creerElementSQL(
                 "div",
                 "lien-script"
             );
 
-        if (!disponible) {
-            element.setAttribute(
-                "aria-disabled",
-                "true"
-            );
-        } else {
-            element.title = t.structure.texteLienScript;
         }
 
-        const texte =
-            creerElementSQL("span", "nom-script");
-
-        const nom =
-            creerElementSQL(
-                "strong",
-                "",
-                nomFichier
-            );
-
-        const description =
-            creerElementSQL(
-                "span",
-                "",
-                t.structure.scripts[nomFichier]
-            );
-
-        description.style.display = "block";
-        description.style.fontSize = "12px";
-        description.style.fontWeight = "400";
-        description.style.color =
-            "var(--texte-secondaire)";
-
-        texte.appendChild(nom);
-        texte.appendChild(description);
-
-        element.appendChild(texte);
-
-        if (disponible) {
-
-            const icone =
-                creerElementSQL(
-                    "span",
-                    "icone-lien",
-                    "↗"
-                );
-
-            icone.setAttribute("aria-hidden", "true");
-
-            element.appendChild(icone);
-
-        }
+        element.textContent =
+            t.structure.scripts[fichier.cle];
 
         grille.appendChild(element);
 
     });
 
-    section.appendChild(grille);
-
-    conteneur.appendChild(section);
+    conteneur.appendChild(grille);
 
 }
 
 
-/**
- * Assemble le premier module :
- * présentation, légende, diagramme et scripts.
- */
+/* ==================================================
+   15. AFFICHAGE COMPLET DU MODULE STRUCTURE
+   ================================================== */
+
 function afficherStructureSQL() {
 
     const t = obtenirTraductionsSQL();
@@ -772,117 +864,192 @@ function afficherStructureSQL() {
     const fragment =
         document.createDocumentFragment();
 
-    creerPresentationBaseSQL(fragment, t);
+    creerIntroductionStructureSQL(fragment, t);
+
+    creerListeTablesSQL(fragment, t);
 
     creerDiagrammeSQL(fragment, t);
 
-    creerSectionScriptsSQL(fragment, t);
+    const separateur = creerElementSQL("hr");
+
+    fragment.appendChild(separateur);
+
+    creerListeScriptsSQL(fragment, t);
 
     elementsSQL.contenu.replaceChildren(fragment);
 
 }
 
 
-/* ==========================================================
-   12 — AFFICHAGE DES CAS D'USAGE SQL
-   ========================================================== */
+/* ==================================================
+   16. RÉCUPÉRATION D'UN SCÉNARIO QA
+   ================================================== */
 
-/**
- * Retourne les données traduites d'un scénario.
- */
-function obtenirScenarioSQL() {
+function obtenirScenarioActifSQL() {
 
     const t = obtenirTraductionsSQL();
 
     const identifiant =
         scenarioActifSQL[moduleActifSQL];
 
-    const donnees = moduleActifSQL === "EXTRACTION"
-        ? t.extraction[identifiant]
-        : t.integrite[identifiant];
+    const module =
+        moduleActifSQL === "EXTRACTION"
+            ? t.extraction
+            : t.integrite;
 
     return {
-        identifiant,
-        donnees,
+
+        identifiant: identifiant,
+
+        module: module,
+
+        donnees: module.scenarios[identifiant],
+
         traductions: t
+
     };
 
 }
 
 
-/**
- * Construit le titre, l'identifiant et la description
- * d'un scénario QA.
- */
+/* ==================================================
+   17. EN-TÊTE ET DESCRIPTION D'UN SCÉNARIO
+   ================================================== */
+
 function creerEnteteScenarioSQL(conteneur, scenario) {
 
-    const entete =
-        creerElementSQL("div", "entete-test");
-
-    const groupe =
-        creerElementSQL("div");
-
-    const identifiant =
-        creerElementSQL(
-            "span",
-            "identifiant-test",
-            scenario.identifiant
-        );
-
-    const titre =
-        creerElementSQL(
-            "h3",
-            "titre-test",
-            scenario.donnees.titre
-        );
-
-    groupe.appendChild(identifiant);
-    groupe.appendChild(titre);
-
-    entete.appendChild(groupe);
-
-    conteneur.appendChild(entete);
+    ajouterTitreSQL(
+        conteneur,
+        2,
+        scenario.module.titre
+    );
 
     ajouterParagrapheSQL(
         conteneur,
-        scenario.donnees.description,
-        "description-test"
+        scenario.module.introduction
+    );
+
+    ajouterParagrapheSQL(
+        conteneur,
+        scenario.module.consigne
+    );
+
+    const separateur = creerElementSQL("hr");
+
+    conteneur.appendChild(separateur);
+
+    const reference = creerElementSQL(
+        "span",
+        "reference-scenario",
+        scenario.identifiant
+    );
+
+    conteneur.appendChild(reference);
+
+    ajouterTitreSQL(
+        conteneur,
+        3,
+        scenario.donnees.titre
     );
 
 }
 
 
-/**
- * Affiche une capture SSMS correspondant à un scénario.
- */
+/* ==================================================
+   18. INFORMATIONS DU SCÉNARIO QA
+   ================================================== */
+
+/*
+   Présente le contexte métier, l'objectif QA
+   et la contrainte testée lorsqu'elle existe.
+*/
+
+function creerInformationsScenarioSQL(conteneur, scenario) {
+
+    const t = scenario.traductions;
+
+    const grille = creerElementSQL(
+        "div",
+        "informations-scenario"
+    );
+
+    const informations = [
+        {
+            titre: t.commun.contexte,
+            texte: scenario.donnees.contexte
+        },
+        {
+            titre: t.commun.objectif,
+            texte: scenario.donnees.objectif
+        }
+    ];
+
+    if (scenario.donnees.contrainte) {
+
+        informations.push({
+            titre: t.commun.contrainte,
+            texte: scenario.donnees.contrainte
+        });
+
+    }
+
+    informations.forEach((information) => {
+
+        const bloc = creerElementSQL(
+            "div",
+            "information-qa"
+        );
+
+        ajouterTitreSQL(
+            bloc,
+            3,
+            information.titre
+        );
+
+        ajouterParagrapheSQL(
+            bloc,
+            information.texte
+        );
+
+        grille.appendChild(bloc);
+
+    });
+
+    conteneur.appendChild(grille);
+
+}
+
+
+/* ==================================================
+   19. CAPTURE D'ÉCRAN D'UN SCÉNARIO
+   ================================================== */
+
 function creerCaptureScenarioSQL(conteneur, scenario) {
 
     const t = scenario.traductions;
 
-    const bloc =
-        creerElementSQL("div", "bloc-capture");
+    const bloc = creerElementSQL(
+        "div",
+        "capture-scenario"
+    );
 
-    const nomFichier =
-        scenario.identifiant + ".png";
+    const chemin = obtenirCheminImageSQL(
+        scenario.identifiant + ".png"
+    );
 
-    const chemin =
-        cheminImageSQL(nomFichier);
-
-    const lien =
-        creerLienSQL(chemin, "lien-capture");
+    const lien = creerLienSQL(chemin);
 
     lien.setAttribute(
         "aria-label",
-        t.tests.agrandirCapture
+        t.commun.ouvrirCapture
     );
 
-    const image =
-        creerElementSQL("img", "image-capture");
+    const image = creerElementSQL("img");
 
     image.src = chemin;
 
     image.alt =
-        t.tests.titreCapture +
+        t.commun.capture +
         " — " +
         scenario.identifiant +
         " : " +
@@ -896,7 +1063,7 @@ function creerCaptureScenarioSQL(conteneur, scenario) {
 
     ajouterParagrapheSQL(
         bloc,
-        t.tests.agrandirCapture,
+        t.commun.ouvrirCapture,
         "legende-capture"
     );
 
@@ -905,107 +1072,193 @@ function creerCaptureScenarioSQL(conteneur, scenario) {
 }
 
 
-/**
- * Présente le résultat attendu et le résultat observé.
- *
- * Pour les tests négatifs, le rejet est un comportement
- * attendu et non un échec du scénario QA.
- */
-function creerResultatScenarioSQL(conteneur, scenario) {
+/* ==================================================
+   20. RÉSULTATS ET CONCLUSION DU SCÉNARIO
+   ================================================== */
+
+function creerResultatsScenarioSQL(conteneur, scenario) {
 
     const t = scenario.traductions;
 
-    const resultat =
-        creerElementSQL("div", "resultat-test");
-
-    const contenu =
-        creerElementSQL("div");
-
-    const attendu =
-        creerElementSQL("p");
-
-    const titreAttendu =
-        creerElementSQL(
-            "strong",
-            "",
-            t.tests.resultatAttendu + " : "
-        );
-
-    attendu.appendChild(titreAttendu);
-
-    attendu.appendChild(
-        document.createTextNode(
-            scenario.donnees.attendu
-        )
+    const grille = creerElementSQL(
+        "div",
+        "informations-scenario"
     );
 
-    const observe =
-        creerElementSQL("p");
+    const resultats = [
+        {
+            titre: t.commun.resultatAttendu,
+            texte: scenario.donnees.resultatAttendu
+        },
+        {
+            titre: t.commun.resultatObtenu,
+            texte: scenario.donnees.resultatObtenu
+        }
+    ];
 
-    const titreObserve =
-        creerElementSQL(
-            "strong",
-            "",
-            t.tests.resultatObserve + " : "
+    resultats.forEach((resultat) => {
+
+        const bloc = creerElementSQL(
+            "div",
+            "information-qa"
         );
 
-    observe.appendChild(titreObserve);
+        ajouterTitreSQL(
+            bloc,
+            3,
+            resultat.titre
+        );
 
-    observe.appendChild(
-        document.createTextNode(
-            scenario.donnees.observe
-        )
+        ajouterParagrapheSQL(
+            bloc,
+            resultat.texte
+        );
+
+        grille.appendChild(bloc);
+
+    });
+
+    conteneur.appendChild(grille);
+
+    const conclusion = creerElementSQL(
+        "div",
+        "acces-projet"
     );
 
-    contenu.appendChild(attendu);
-    contenu.appendChild(observe);
+    ajouterTitreSQL(
+        conclusion,
+        3,
+        t.commun.conclusion
+    );
 
-    resultat.appendChild(contenu);
+    const texteConclusion = ajouterParagrapheSQL(
+        conclusion,
+        scenario.donnees.conclusion
+    );
 
-    conteneur.appendChild(resultat);
+    texteConclusion.classList.add(
+        "resultat-valide"
+    );
+
+    conteneur.appendChild(conclusion);
 
 }
 
 
-/**
- * Affiche le cas d'usage sélectionné.
- */
+/* ==================================================
+   21. ACCÈS AU SCRIPT SQL COMPLET
+   ================================================== */
+
+/*
+   Les captures présentent uniquement une sélection
+   de requêtes et de tests QA.
+
+   Les scripts complets pourront être consultés
+   depuis GitHub lorsque leurs liens seront définis.
+*/
+
+function creerAccesScriptScenarioSQL(conteneur, scenario) {
+
+    const t = scenario.traductions;
+
+    const bloc = creerElementSQL(
+        "div",
+        "acces-projet"
+    );
+
+    ajouterTitreSQL(
+        bloc,
+        3,
+        t.commun.projetComplet
+    );
+
+    ajouterParagrapheSQL(
+        bloc,
+        t.commun.descriptionProjetComplet
+    );
+
+    /*
+       Le lien individuel vers le script sera activé
+       uniquement lorsque dossierScripts sera renseigné.
+    */
+
+    if (scriptsDisponiblesSQL()) {
+
+        const nomFichier =
+            moduleActifSQL === "EXTRACTION"
+                ? "06_extraction_donnees.sql"
+                : "08_tests_qa.sql";
+
+        const lien = creerLienSQL(
+            obtenirLienScriptSQL(nomFichier),
+            "lien-script"
+        );
+
+        lien.textContent =
+            t.commun.consulterScript;
+
+        bloc.appendChild(lien);
+
+    }
+
+    /*
+       Le dépôt principal est déjà connu.
+       Ce lien reste disponible en permanence.
+    */
+
+    const lienDepot = creerLienSQL(
+        configurationSQL.depotPortfolio
+    );
+
+    lienDepot.textContent =
+        t.commun.consulterGitHub;
+
+    bloc.appendChild(lienDepot);
+
+    conteneur.appendChild(bloc);
+
+}
+
+
+/* ==================================================
+   22. AFFICHAGE COMPLET D'UN SCÉNARIO
+   ================================================== */
+
 function afficherScenarioSQL() {
 
-    const scenario =
-        obtenirScenarioSQL();
+    const scenario = obtenirScenarioActifSQL();
 
-    const fiche =
-        creerElementSQL("article", "fiche-test");
+    const fiche = creerElementSQL(
+        "article",
+        "fiche-scenario"
+    );
 
     creerEnteteScenarioSQL(fiche, scenario);
 
+    creerInformationsScenarioSQL(fiche, scenario);
+
     creerCaptureScenarioSQL(fiche, scenario);
 
-    creerResultatScenarioSQL(fiche, scenario);
+    creerResultatsScenarioSQL(fiche, scenario);
+
+    creerAccesScriptScenarioSQL(fiche, scenario);
 
     elementsSQL.contenu.replaceChildren(fiche);
 
 }
 
 
-/* ==========================================================
-   13 — AFFICHAGE GLOBAL DE L'INTERFACE
-   ========================================================== */
+/* ==================================================
+   23. AFFICHAGE GÉNÉRAL DE LA DÉMONSTRATION
+   ================================================== */
 
-/**
- * Actualise l'ensemble des zones dépendantes
- * du module et de la langue sélectionnés.
- */
-function afficherInterfaceSQL() {
+function afficherDemonstrationSQL() {
 
     afficherTextesGenerauxSQL();
 
-    actualiserBoutonsModulesSQL();
+    actualiserNavigationModulesSQL();
 
-    afficherPresentationModuleSQL();
-
-    afficherNavigationTestsSQL();
+    afficherNavigationScenariosSQL();
 
     if (moduleActifSQL === "STRUCTURE") {
 
@@ -1020,32 +1273,27 @@ function afficherInterfaceSQL() {
 }
 
 
-/* ==========================================================
-   14 — GESTION DES ÉVÉNEMENTS
-   ========================================================== */
+/* ==================================================
+   24. ÉVÉNEMENTS DES BOUTONS
+   ================================================== */
 
-/**
- * Initialise les événements des boutons de langue.
- */
-function initialiserLanguesSQL() {
+function initialiserBoutonsSQL() {
+
+    // Bouton français.
 
     elementsSQL.boutonFR.addEventListener(
         "click",
         () => changerLangueSQL("fr")
     );
 
+    // Bouton anglais.
+
     elementsSQL.boutonEN.addEventListener(
         "click",
         () => changerLangueSQL("en")
     );
 
-}
-
-
-/**
- * Initialise la navigation entre les trois modules.
- */
-function initialiserModulesSQL() {
+    // Navigation entre les trois modules.
 
     elementsSQL.navigationModules.addEventListener(
         "click",
@@ -1058,7 +1306,9 @@ function initialiserModulesSQL() {
                 return;
             }
 
-            changerModuleSQL(bouton.dataset.module);
+            changerModuleSQL(
+                bouton.dataset.module
+            );
 
         }
     );
@@ -1066,18 +1316,29 @@ function initialiserModulesSQL() {
 }
 
 
-/**
- * Écoute les changements de langue envoyés par
- * le portfolio parent à travers l'iframe.
- */
-function initialiserCommunicationPortfolioSQL() {
+/* ==================================================
+   25. COMMUNICATION AVEC LE PORTFOLIO PRINCIPAL
+   ================================================== */
+
+/*
+   Lorsque la démonstration est affichée
+   dans l'iframe du portfolio, elle peut
+   recevoir un changement de langue.
+
+   Le message attendu est :
+
+   {
+       type: "CHANGER_LANGUE",
+       langue: "fr" ou "en"
+   }
+*/
+
+function initialiserCommunicationSQL() {
 
     window.addEventListener(
         "message",
         (evenement) => {
 
-            // La démonstration accepte uniquement les
-            // messages provenant de la même origine.
             if (evenement.origin !== window.location.origin) {
                 return;
             }
@@ -1087,7 +1348,9 @@ function initialiserCommunicationPortfolioSQL() {
                 evenement.data.type === "CHANGER_LANGUE"
             ) {
 
-                changerLangueSQL(evenement.data.langue);
+                changerLangueSQL(
+                    evenement.data.langue
+                );
 
             }
 
@@ -1097,29 +1360,74 @@ function initialiserCommunicationPortfolioSQL() {
 }
 
 
-/* ==========================================================
-   15 — INITIALISATION DE LA PAGE
-   ========================================================== */
+/* ==================================================
+   26. INITIALISATION DE LA DÉMONSTRATION
+   ================================================== */
 
-function initialiserDemonstrationSQL() {
+function initialiserSQL() {
 
-    langueSQL = lireLangueSQL();
+    /*
+       Vérification de la présence des traductions.
 
-    document.documentElement.lang = langueSQL;
+       Si traductions.js n'a pas été chargé,
+       un message explicite apparaît dans la console.
+    */
 
-    initialiserLanguesSQL();
+    if (typeof traductionsSQL === "undefined") {
 
-    initialiserModulesSQL();
+        console.error(
+            "SQL : traductions.js est absent ou n'a pas été chargé."
+        );
 
-    initialiserCommunicationPortfolioSQL();
+        return;
+    }
 
-    afficherInterfaceSQL();
+    /*
+       Vérification des éléments HTML indispensables.
+    */
+
+    const elementsManquants = Object.entries(elementsSQL)
+        .filter(([, element]) => element === null)
+        .map(([nom]) => nom);
+
+    if (elementsManquants.length > 0) {
+
+        console.error(
+            "SQL : éléments HTML introuvables :",
+            elementsManquants
+        );
+
+        return;
+    }
+
+    /*
+       Chargement de la langue enregistrée.
+    */
+
+    langueActiveSQL = lireLangueSQL();
+
+    document.documentElement.lang =
+        langueActiveSQL;
+
+    /*
+       Activation des interactions et
+       premier affichage du module STRUCTURE.
+    */
+
+    initialiserBoutonsSQL();
+
+    initialiserCommunicationSQL();
+
+    afficherDemonstrationSQL();
 
 }
 
 
-// Les scripts sont chargés avec defer dans index.html.
-// Le DOM est donc disponible au moment de l'initialisation.
+/*
+   Les fichiers JavaScript sont chargés avec defer.
 
-initialiserDemonstrationSQL();
+   Le document HTML est donc disponible au moment
+   où cette fonction est exécutée.
+*/
 
+initialiserSQL();
