@@ -1,1 +1,213 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- ======================================================
+         01 — CONFIGURATION DU DOCUMENT
+         ====================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Démonstration de tests QA sur une base SQL Server e-commerce : extraction, contrôle des données et tests d'intégrité.">
+
+    <title>SQL — Démonstration QA</title>
+
+    <!-- ======================================================
+         02 — FEUILLE DE STYLE
+         ====================================================== -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <!-- ======================================================
+         03 — CONTENEUR PRINCIPAL
+         ====================================================== -->
+    <div class="page-sql">
+
+        <!-- ==================================================
+             04 — EN-TÊTE ET SÉLECTION DE LANGUE
+             ================================================== -->
+        <header class="entete">
+
+            <div class="entete-superieur">
+
+                <span class="etiquette-projet">
+                    SQL SERVER · QA
+                </span>
+
+                <div class="langues"
+                     role="group"
+                     aria-label="Choix de la langue">
+
+                    <button
+                        type="button"
+                        id="bouton-fr"
+                        class="bouton-langue"
+                        aria-pressed="true">
+                        FR
+                    </button>
+
+                    <button
+                        type="button"
+                        id="bouton-en"
+                        class="bouton-langue"
+                        aria-pressed="false">
+                        EN
+                    </button>
+
+                </div>
+
+            </div>
+
+            <h1 id="titre-site">
+                SQL — Démonstration QA
+            </h1>
+
+            <p id="sous-titre">
+                Projet pédagogique · QA_Ecommerce_Demo · SQL Server
+            </p>
+
+        </header>
+
+        <!-- ==================================================
+             05 — NAVIGATION ENTRE LES TROIS MODULES
+             ================================================== -->
+        <nav
+            id="navigation-modules"
+            class="navigation-modules"
+            aria-label="Navigation de la démonstration SQL">
+
+            <button
+                type="button"
+                class="bouton-module actif"
+                data-module="STRUCTURE"
+                aria-pressed="true">
+
+                <span class="numero-module">01</span>
+                <span id="onglet-structure">
+                    Structure de la base
+                </span>
+
+            </button>
+
+            <button
+                type="button"
+                class="bouton-module"
+                data-module="EXTRACTION"
+                aria-pressed="false">
+
+                <span class="numero-module">02</span>
+                <span id="onglet-extraction">
+                    Extraction et contrôle
+                </span>
+
+            </button>
+
+            <button
+                type="button"
+                class="bouton-module"
+                data-module="INTEGRITE"
+                aria-pressed="false">
+
+                <span class="numero-module">03</span>
+                <span id="onglet-integrite">
+                    Tests d'intégrité
+                </span>
+
+            </button>
+
+        </nav>
+
+        <!-- ==================================================
+             06 — ZONE DE PRÉSENTATION DU MODULE
+             ================================================== -->
+        <section
+            id="presentation-module"
+            class="presentation-module"
+            aria-labelledby="titre-module">
+
+            <div class="presentation-entete">
+
+                <span
+                    id="numero-module-actif"
+                    class="numero-section">
+                    MODULE 01
+                </span>
+
+                <h2 id="titre-module">
+                    Structure de la base
+                </h2>
+
+            </div>
+
+            <p id="description-module">
+                Présentation de la base de données fictive
+                utilisée pour les démonstrations de tests QA.
+            </p>
+
+        </section>
+
+        <!-- ==================================================
+             07 — NAVIGATION DES CAS D'USAGE
+             ================================================== -->
+        <nav
+            id="navigation-tests"
+            class="navigation-tests"
+            aria-label="Sélection des cas d'usage"
+            hidden>
+        </nav>
+
+        <!-- ==================================================
+             08 — CONTENU DYNAMIQUE
+             ================================================== -->
+        <main id="contenu-principal">
+
+            <section
+                id="contenu"
+                class="carte"
+                aria-live="polite">
+
+                <!-- Le contenu du module sélectionné
+                     sera généré par index.js. -->
+
+            </section>
+
+        </main>
+
+        <!-- ==================================================
+             09 — PIED DE PAGE
+             ================================================== -->
+        <footer id="pied-page" class="pied-page">
+
+            <p id="texte-pied-page">
+                Projet pédagogique de démonstration QA.
+                Base de données fictive.
+            </p>
+
+            <a
+                id="lien-depot"
+                href="https://github.com/alexis-durouchet/Portfolio-technique---Test-QA"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <span id="texte-lien-depot">
+                    Consulter le projet sur GitHub
+                </span>
+
+            </a>
+
+        </footer>
+
+    </div>
+
+    <!-- ======================================================
+         10 — SCRIPTS JAVASCRIPT
+         ====================================================== -->
+    <script src="traductions.js" defer></script>
+    <script src="index.js" defer></script>
+
+</body>
+</html>
