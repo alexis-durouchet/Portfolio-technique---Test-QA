@@ -3,65 +3,79 @@
 <html lang="fr">
 
 <head>
-    <!-- ======================================================
-         01 — CONFIGURATION DU DOCUMENT
-         ====================================================== -->
+    <!-- ==================================================
+         1. CONFIGURATION DE LA PAGE
+         ================================================== -->
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Démonstration de tests QA sur une base SQL Server e-commerce : extraction, contrôle des données et tests d'intégrité.">
+          content="Démonstration de tests QA SQL sur une base de données e-commerce fictive : structure, extraction de données et contrôles d'intégrité.">
 
     <title>SQL — Démonstration QA</title>
 
-    <!-- ======================================================
-         02 — FEUILLE DE STYLE
-         ====================================================== -->
+    <!-- Feuille de style -->
     <link rel="stylesheet" href="index.css">
+
+    <!-- ==================================================
+         2. FICHIERS JAVASCRIPT
+         ================================================== -->
+
+    <!--
+         Les scripts seront activés lorsque les fichiers
+         traductions.js et index.js seront finalisés.
+
+         Pour les activer, retirer les commentaires
+         entourant chaque balise script.
+    -->
+
+    <!-- Traductions de la démonstration -->
+    <!--
+    <script src="traductions.js" defer></script>
+    -->
+
+    <!-- Fonctionnement de la démonstration -->
+    <!--
+    <script src="index.js" defer></script>
+    -->
+
 </head>
 
 <body>
 
-    <!-- ======================================================
-         03 — CONTENEUR PRINCIPAL
-         ====================================================== -->
-    <div class="page-sql">
+    <!-- ==================================================
+         3. EN-TÊTE ET SÉLECTEUR DE LANGUE
+         ================================================== -->
 
-        <!-- ==================================================
-             04 — EN-TÊTE ET SÉLECTION DE LANGUE
-             ================================================== -->
-        <header class="entete">
+    <header>
+        <div class="entete">
 
-            <div class="entete-superieur">
+            <!-- Sélection Français / English -->
+            <div class="langues"
+                 role="group"
+                 aria-label="Language / Langue">
 
-                <span class="etiquette-projet">
-                    SQL SERVER · QA
-                </span>
-
-                <div class="langues"
-                     role="group"
-                     aria-label="Choix de la langue">
-
-                    <button
-                        type="button"
+                <button type="button"
                         id="bouton-fr"
-                        class="bouton-langue"
-                        aria-pressed="true">
-                        FR
-                    </button>
+                        class="actif"
+                        aria-pressed="true"
+                        lang="fr">
+                    FR
+                </button>
 
-                    <button
-                        type="button"
+                <button type="button"
                         id="bouton-en"
-                        class="bouton-langue"
-                        aria-pressed="false">
-                        EN
-                    </button>
-
-                </div>
+                        aria-pressed="false"
+                        lang="en">
+                    EN
+                </button>
 
             </div>
 
+            <!-- Présentation de la démonstration -->
             <h1 id="titre-site">
                 SQL — Démonstration QA
             </h1>
@@ -70,144 +84,125 @@
                 Projet pédagogique · QA_Ecommerce_Demo · SQL Server
             </p>
 
-        </header>
+        </div>
+    </header>
+
+    <!-- ==================================================
+         4. CONTENU PRINCIPAL
+         ================================================== -->
+
+    <main>
 
         <!-- ==================================================
-             05 — NAVIGATION ENTRE LES TROIS MODULES
+             5. NAVIGATION ENTRE LES TROIS MODULES
              ================================================== -->
-        <nav
-            id="navigation-modules"
-            class="navigation-modules"
-            aria-label="Navigation de la démonstration SQL">
 
-            <button
-                type="button"
-                class="bouton-module actif"
-                data-module="STRUCTURE"
-                aria-pressed="true">
+        <nav id="navigation-modules"
+             aria-label="Modules de la démonstration SQL">
 
-                <span class="numero-module">01</span>
-                <span id="onglet-structure">
-                    Structure de la base
-                </span>
+            <button type="button"
+                    data-module="STRUCTURE"
+                    class="actif"
+                    aria-pressed="true">
+
+                01 — Structure de la base
 
             </button>
 
-            <button
-                type="button"
-                class="bouton-module"
-                data-module="EXTRACTION"
-                aria-pressed="false">
+            <button type="button"
+                    data-module="EXTRACTION"
+                    aria-pressed="false">
 
-                <span class="numero-module">02</span>
-                <span id="onglet-extraction">
-                    Extraction et contrôle
-                </span>
+                02 — Extraction et contrôle
 
             </button>
 
-            <button
-                type="button"
-                class="bouton-module"
-                data-module="INTEGRITE"
-                aria-pressed="false">
+            <button type="button"
+                    data-module="INTEGRITE"
+                    aria-pressed="false">
 
-                <span class="numero-module">03</span>
-                <span id="onglet-integrite">
-                    Tests d'intégrité
-                </span>
+                03 — Tests d'intégrité
 
             </button>
 
         </nav>
 
         <!-- ==================================================
-             06 — ZONE DE PRÉSENTATION DU MODULE
+             6. NAVIGATION DES CAS D'USAGE
              ================================================== -->
-        <section
-            id="presentation-module"
-            class="presentation-module"
-            aria-labelledby="titre-module">
 
-            <div class="presentation-entete">
+        <!--
+             Cette navigation sera alimentée par index.js.
 
-                <span
-                    id="numero-module-actif"
-                    class="numero-section">
-                    MODULE 01
-                </span>
+             MODULE STRUCTURE :
+             Aucun cas d'usage à sélectionner.
 
-                <h2 id="titre-module">
-                    Structure de la base
-                </h2>
+             MODULE EXTRACTION :
+             EXT-01 à EXT-05.
 
-            </div>
+             MODULE INTÉGRITÉ :
+             INT-01 à INT-04.
+        -->
 
-            <p id="description-module">
-                Présentation de la base de données fictive
-                utilisée pour les démonstrations de tests QA.
-            </p>
+        <nav id="navigation-tests"
+             aria-label="Cas d'usage du module sélectionné"
+             hidden>
+        </nav>
+
+        <!-- ==================================================
+             7. AFFICHAGE DU CONTENU
+             ================================================== -->
+
+        <!--
+             Cette section sera alimentée dynamiquement
+             par index.js.
+
+             STRUCTURE :
+             - Présentation de la base de données
+             - Description des cinq tables
+             - Diagramme relationnel Arbo-diag.png
+             - Accès aux huit scripts SQL
+
+             EXTRACTION :
+             - Présentation des contrôles QA
+             - Sélection des scénarios EXT-01 à EXT-05
+             - Objectifs et résultats attendus
+             - Captures SSMS correspondantes
+             - Accès au script SQL complet
+
+             INTÉGRITÉ :
+             - Présentation des tests négatifs
+             - Sélection des scénarios INT-01 à INT-04
+             - Contraintes vérifiées
+             - Résultats attendus et obtenus
+             - Captures SSMS correspondantes
+             - Accès au script SQL complet
+        -->
+
+        <section id="contenu"
+                 class="carte"
+                 aria-live="polite"
+                 aria-label="Contenu de la démonstration SQL">
+
+            <!--
+                 Contenu généré par JavaScript.
+            -->
 
         </section>
 
-        <!-- ==================================================
-             07 — NAVIGATION DES CAS D'USAGE
-             ================================================== -->
-        <nav
-            id="navigation-tests"
-            class="navigation-tests"
-            aria-label="Sélection des cas d'usage"
-            hidden>
-        </nav>
+    </main>
 
-        <!-- ==================================================
-             08 — CONTENU DYNAMIQUE
-             ================================================== -->
-        <main id="contenu-principal">
+    <!-- ==================================================
+         8. PIED DE PAGE
+         ================================================== -->
 
-            <section
-                id="contenu"
-                class="carte"
-                aria-live="polite">
+    <footer id="pied-page">
 
-                <!-- Le contenu du module sélectionné
-                     sera généré par index.js. -->
+        Portfolio QA — Démonstration SQL ·
+        Base de données fictive QA_Ecommerce_Demo
 
-            </section>
-
-        </main>
-
-        <!-- ==================================================
-             09 — PIED DE PAGE
-             ================================================== -->
-        <footer id="pied-page" class="pied-page">
-
-            <p id="texte-pied-page">
-                Projet pédagogique de démonstration QA.
-                Base de données fictive.
-            </p>
-
-            <a
-                id="lien-depot"
-                href="https://github.com/alexis-durouchet/Portfolio-technique---Test-QA"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                <span id="texte-lien-depot">
-                    Consulter le projet sur GitHub
-                </span>
-
-            </a>
-
-        </footer>
-
-    </div>
-
-    <!-- ======================================================
-         10 — SCRIPTS JAVASCRIPT
-         ====================================================== -->
-    <script src="traductions.js" defer></script>
-    <script src="index.js" defer></script>
+    </footer>
 
 </body>
+
 </html>
