@@ -1,956 +1,772 @@
 
+/* ==================================================
+   1. TRADUCTIONS DE LA DÉMONSTRATION SQL
+   ==================================================
 
-/* ==========================================================
-   01 — VARIABLES ET IDENTITÉ VISUELLE
-   ========================================================== */
+   Projet : QA_Ecommerce_Demo
+   Technologie : Microsoft SQL Server
 
-:root {
-    color-scheme: dark;
+   Ce fichier centralise les textes français et anglais.
 
-    --fond-page: #0d1117;
-    --fond-carte: #161b22;
-    --fond-secondaire: #0f1724;
-    --fond-interactif: #212936;
+   ================================================== */
 
-    --bordure: #30363d;
-    --bordure-active: #388bfd;
+const traductionsSQL = {
 
-    --texte-principal: #e6edf3;
-    --texte-secondaire: #9da7b3;
-    --texte-discret: #7d8590;
+    /* ==================================================
+       2. VERSION FRANÇAISE
+       ================================================== */
 
-    --accent: #58a6ff;
-    --accent-clair: #79c0ff;
-    --accent-fond: rgba(56, 139, 253, 0.12);
+    fr: {
 
-    --succes: #3fb950;
-    --succes-fond: rgba(63, 185, 80, 0.10);
+        /* ----------------------------------------------
+           2.1. EN-TÊTE ET NAVIGATION
+           ---------------------------------------------- */
 
-    --erreur: #f85149;
-    --erreur-fond: rgba(248, 81, 73, 0.10);
+        titreSite: "SQL — Démonstration QA",
 
-    --rayon: 12px;
-    --rayon-petit: 8px;
+        sousTitre:
+            "Projet pédagogique · QA_Ecommerce_Demo · SQL Server",
 
-    --largeur-maximale: 1200px;
+        modules: {
+            STRUCTURE: "Structure de la base",
+            EXTRACTION: "Extraction et contrôle",
+            INTEGRITE: "Tests d'intégrité"
+        },
 
-    --transition: 0.2s ease;
-}
+        navigationModules: "Modules de la démonstration SQL",
+        navigationTests: "Scénarios QA du module sélectionné",
 
+        /* ----------------------------------------------
+           2.2. MODULE 01 : STRUCTURE DE LA BASE
+           ---------------------------------------------- */
 
-/* ==========================================================
-   02 — RÉINITIALISATION ET BASE DU DOCUMENT
-   ========================================================== */
+        structure: {
 
-* {
-    box-sizing: border-box;
-}
+            titre: "Structure de la base de données",
 
-html {
-    scroll-behavior: smooth;
-}
+            introduction:
+                "Cette démonstration repose sur une base de données fictive représentant une activité de commerce en ligne. Elle permet de mettre en pratique des contrôles SQL dans un contexte de test logiciel.",
 
-body {
-    margin: 0;
-    min-width: 320px;
+            titrePresentation: "Présentation du projet",
 
-    background: var(--fond-page);
-    color: var(--texte-principal);
+            presentation:
+                "Le projet QA_Ecommerce_Demo a été réalisé avec Microsoft SQL Server et SQL Server Management Studio (SSMS). Il comprend cinq tables reliées entre elles, un jeu de données de référence et plusieurs contraintes destinées à garantir la cohérence des informations.",
 
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
+            titreObjectif: "Objectif QA",
 
-    font-size: 15px;
-    line-height: 1.6;
-}
+            objectif:
+                "Utiliser SQL pour consulter les données, vérifier leur cohérence avec les règles métier et contrôler le comportement des contraintes d'intégrité.",
 
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
+            titreTables: "Les cinq tables de la base",
 
-button {
-    font: inherit;
-}
+            tables: {
 
-a {
-    color: var(--accent);
-    text-decoration: none;
-}
+                Clients: {
+                    titre: "Clients",
+                    description:
+                        "Informations des clients : identité et adresse e-mail."
+                },
 
-a:hover {
-    color: var(--accent-clair);
-}
+                Produits: {
+                    titre: "Produits",
+                    description:
+                        "Catalogue des produits : désignation, prix et stock."
+                },
 
-button:focus-visible,
-a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-}
+                Commandes: {
+                    titre: "Commandes",
+                    description:
+                        "Commandes passées par les clients, avec leur date et leur statut."
+                },
 
-[hidden] {
-    display: none !important;
-}
+                Lignes_Commande: {
+                    titre: "Lignes_Commande",
+                    description:
+                        "Détail des produits commandés, quantités et prix unitaires."
+                },
 
+                Avis_Clients: {
+                    titre: "Avis_Clients",
+                    description:
+                        "Avis déposés par les clients sur les produits."
+                }
+            },
 
-/* ==========================================================
-   03 — CONTENEUR PRINCIPAL
-   ========================================================== */
+            titreLegende: "Lecture du diagramme",
 
-.page-sql {
-    width: min(100%, var(--largeur-maximale));
-    min-height: 100vh;
+            legende: [
+                "Les clés primaires identifient les enregistrements.",
+                "Les clés étrangères relient les tables.",
+                "Les relations permettent de contrôler la cohérence des données."
+            ],
 
-    margin: 0 auto;
-    padding: 32px 28px 24px;
-}
+            titreDiagramme: "Diagramme relationnel",
 
+            descriptionDiagramme:
+                "Vue des cinq tables et de leurs relations dans SQL Server.",
 
-/* ==========================================================
-   04 — EN-TÊTE DE LA DÉMONSTRATION
-   ========================================================== */
+            ouvrirDiagramme:
+                "Cliquer sur le diagramme pour afficher l'image complète.",
 
-.entete {
-    margin-bottom: 28px;
-}
+            texteAlternatifDiagramme:
+                "Diagramme relationnel de la base QA_Ecommerce_Demo présentant les cinq tables et leurs relations.",
 
-.entete-superieur {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+            titreScripts: "Scripts SQL du projet",
 
-    gap: 16px;
-    margin-bottom: 18px;
-}
+            descriptionScripts:
+                "Les huit scripts du projet sont consultables sur GitHub. Ils documentent la création de la base, ses contraintes, son jeu de données et les contrôles réalisés.",
 
-.etiquette-projet {
-    display: inline-flex;
-    align-items: center;
+            scripts: {
+                creation: "01 — Création des tables",
+                contraintes: "02 — Contraintes d'intégrité",
+                donnees: "03 — Jeu de données",
+                index: "04 — Index",
+                gestion: "05 — Gestion des données",
+                extraction: "06 — Extraction des données",
+                complementaires: "07 — Notions complémentaires",
+                tests: "08 — Tests QA"
+            }
+        },
 
-    padding: 5px 11px;
+        /* ----------------------------------------------
+           2.3. MODULE 02 : EXTRACTION ET CONTRÔLE
+           ---------------------------------------------- */
 
-    border: 1px solid var(--bordure);
-    border-radius: 999px;
+        extraction: {
 
-    background: var(--fond-carte);
-    color: var(--accent-clair);
+            titre: "Extraction et contrôle des données",
 
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-}
+            introduction:
+                "Ces scénarios montrent comment exploiter des requêtes SELECT pour vérifier les informations enregistrées dans la base et leur cohérence avec les besoins métier.",
 
-#titre-site {
-    margin: 0 0 8px;
+            consigne:
+                "Sélectionnez un scénario pour consulter sa requête SQL, son résultat et son objectif de contrôle.",
 
-    color: var(--texte-principal);
+            scenarios: {
 
-    font-size: clamp(26px, 3.5vw, 36px);
-    font-weight: 750;
-    line-height: 1.2;
-}
+                "EXT-01": {
+                    titre: "Montant total d'une commande",
 
-#sous-titre {
-    margin: 0;
+                    contexte:
+                        "Une commande contient plusieurs lignes de produits.",
 
-    color: var(--texte-secondaire);
+                    objectif:
+                        "Recalculer le montant total à partir des quantités et des prix unitaires pour vérifier sa cohérence.",
 
-    font-size: 14px;
-}
+                    resultatAttendu:
+                        "La commande 1 doit présenter un montant total de 139,70 €.",
 
+                    resultatObtenu:
+                        "La requête retourne 139,70 pour la commande 1.",
 
-/* ==========================================================
-   05 — SÉLECTEUR DE LANGUE FR / EN
-   ========================================================== */
+                    conclusion:
+                        "Le montant calculé correspond au résultat attendu."
+                },
 
-.langues {
-    display: inline-flex;
-    align-items: center;
+                "EXT-02": {
+                    titre: "Détail d'une commande",
 
-    gap: 5px;
-    padding: 4px;
+                    contexte:
+                        "Un client consulte les produits associés à sa commande.",
 
-    background: var(--fond-carte);
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon-petit);
-}
+                    objectif:
+                        "Vérifier la correspondance entre les lignes de commande et les produits enregistrés à l'aide d'une jointure INNER JOIN.",
 
-.bouton-langue {
-    min-width: 42px;
-    padding: 6px 11px;
+                    resultatAttendu:
+                        "La commande 1 doit contenir deux lignes : un clavier mécanique et deux souris sans fil.",
 
-    border: 1px solid transparent;
-    border-radius: 6px;
+                    resultatObtenu:
+                        "Les deux produits et leurs quantités sont correctement retrouvés.",
 
-    background: transparent;
-    color: var(--texte-secondaire);
+                    conclusion:
+                        "Les lignes de commande correspondent aux produits enregistrés."
+                },
 
-    font-size: 12px;
-    font-weight: 700;
+                "EXT-03": {
+                    titre: "Clients sans commande",
 
-    cursor: pointer;
-    transition:
-        background var(--transition),
-        color var(--transition),
-        border-color var(--transition);
-}
+                    contexte:
+                        "Identifier les clients inscrits n'ayant encore effectué aucun achat.",
 
-.bouton-langue:hover {
-    color: var(--texte-principal);
-    background: var(--fond-interactif);
-}
+                    objectif:
+                        "Vérifier l'identification des clients sans commande à l'aide d'une jointure LEFT JOIN et d'une condition IS NULL.",
 
-.bouton-langue[aria-pressed="true"] {
-    color: var(--accent-clair);
-    background: var(--accent-fond);
-    border-color: var(--bordure-active);
-}
+                    resultatAttendu:
+                        "Le client Petit, identifiant 3, doit apparaître sans commande associée.",
 
+                    resultatObtenu:
+                        "Le client Petit est retourné avec une valeur NULL dans la colonne id_commande.",
 
-/* ==========================================================
-   06 — NAVIGATION HORIZONTALE DES TROIS MODULES
-   ========================================================== */
+                    conclusion:
+                        "La requête identifie correctement le client sans commande."
+                },
 
-.navigation-modules {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+                "EXT-04": {
+                    titre: "Clients ayant plusieurs commandes",
 
-    gap: 12px;
-    margin-bottom: 24px;
-}
+                    contexte:
+                        "Identifier les clients ayant passé au moins deux commandes.",
 
-.bouton-module {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+                    objectif:
+                        "Vérifier le regroupement et le filtrage des résultats à l'aide de COUNT, GROUP BY et HAVING.",
 
-    min-width: 0;
-    min-height: 62px;
+                    resultatAttendu:
+                        "Le client Martin, identifiant 1, doit apparaître avec deux commandes.",
 
-    gap: 12px;
-    padding: 14px 18px;
+                    resultatObtenu:
+                        "La requête retourne le client Martin avec un total de deux commandes.",
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon);
+                    conclusion:
+                        "Le regroupement et le filtre sur le nombre de commandes fonctionnent comme attendu."
+                },
 
-    background: var(--fond-carte);
-    color: var(--texte-secondaire);
+                "EXT-05": {
+                    titre: "Combinaison de filtres du catalogue",
 
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
+                    contexte:
+                        "Rechercher des claviers ou des souris dont le prix ne dépasse pas 50 €.",
 
-    cursor: pointer;
+                    objectif:
+                        "Vérifier la combinaison de conditions AND et OR, avec un filtrage sur le nom et le prix des produits.",
 
-    transition:
-        background var(--transition),
-        color var(--transition),
-        border-color var(--transition),
-        transform var(--transition);
-}
+                    resultatAttendu:
+                        "Seule la souris sans fil à 29,90 € doit apparaître. Le clavier à 79,90 € doit être exclu.",
 
-.bouton-module:hover {
-    background: var(--fond-interactif);
-    color: var(--texte-principal);
-    border-color: #484f58;
-}
+                    resultatObtenu:
+                        "La requête retourne uniquement la souris sans fil, au prix de 29,90 €.",
 
-.bouton-module[aria-pressed="true"],
-.bouton-module.actif {
-    background: var(--accent-fond);
-    color: var(--texte-principal);
-    border-color: var(--bordure-active);
-}
+                    conclusion:
+                        "Les conditions de filtrage sélectionnent correctement le produit attendu."
+                }
+            }
+        },
 
-.numero-module {
-    flex-shrink: 0;
+        /* ----------------------------------------------
+           2.4. MODULE 03 : TESTS D'INTÉGRITÉ
+           ---------------------------------------------- */
 
-    color: var(--accent);
+        integrite: {
 
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-}
+            titre: "Tests d'intégrité des données",
 
+            introduction:
+                "Ces tests négatifs vérifient que SQL Server refuse les opérations contraires aux contraintes définies dans la base. Un message d'erreur peut donc constituer le résultat attendu d'un test réussi.",
 
-/* ==========================================================
-   07 — PRÉSENTATION DU MODULE ACTIF
-   ========================================================== */
+            consigne:
+                "Sélectionnez un test pour consulter l'opération effectuée, le refus de SQL Server et, lorsque cela s'applique, la vérification des données après rejet.",
 
-.presentation-module {
-    margin-bottom: 22px;
-    padding: 22px 24px;
+            scenarios: {
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon);
+                "INT-01": {
+                    titre: "Unicité de l'adresse e-mail",
 
-    background: var(--fond-carte);
-}
+                    contexte:
+                        "Un nouveau client tente de s'inscrire avec une adresse e-mail déjà enregistrée.",
 
-.presentation-entete {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+                    objectif:
+                        "Vérifier qu'une adresse e-mail ne peut pas être utilisée par plusieurs clients.",
 
-    gap: 12px;
-    margin-bottom: 10px;
-}
+                    contrainte:
+                        "UQ_Clients_Email",
 
-.numero-section {
-    display: inline-flex;
-    align-items: center;
+                    resultatAttendu:
+                        "L'insertion doit être refusée par SQL Server.",
 
-    padding: 4px 9px;
+                    resultatObtenu:
+                        "SQL Server retourne une erreur de violation de contrainte UNIQUE KEY (2627).",
 
-    border-radius: 6px;
+                    conclusion:
+                        "La contrainte d'unicité empêche l'enregistrement d'un doublon."
+                },
 
-    background: var(--accent-fond);
-    color: var(--accent-clair);
+                "INT-02": {
+                    titre: "Intégrité référentielle des commandes",
 
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-}
+                    contexte:
+                        "Une commande est créée avec un identifiant client inexistant.",
 
-#titre-module {
-    margin: 0;
+                    objectif:
+                        "Vérifier qu'une commande ne peut pas être associée à un client absent de la base.",
 
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 1.35;
-}
+                    contrainte:
+                        "FK_Commandes_Clients",
 
-#description-module {
-    max-width: 900px;
-    margin: 0;
+                    resultatAttendu:
+                        "L'insertion de la commande associée au client 999 doit être refusée.",
 
-    color: var(--texte-secondaire);
+                    resultatObtenu:
+                        "SQL Server retourne une erreur de violation de clé étrangère (547).",
 
-    font-size: 14px;
-    line-height: 1.75;
-}
+                    conclusion:
+                        "La contrainte de clé étrangère protège la relation entre les commandes et les clients."
+                },
 
+                "INT-03": {
+                    titre: "Refus d'un stock négatif",
 
-/* ==========================================================
-   08 — NAVIGATION DES CAS D'USAGE SQL
-   ========================================================== */
+                    contexte:
+                        "Une modification tente d'attribuer un stock négatif à un produit.",
 
-.navigation-tests {
-    display: flex;
-    flex-wrap: wrap;
+                    objectif:
+                        "Vérifier que SQL Server refuse une valeur de stock inférieure à zéro.",
 
-    gap: 10px;
-    margin-bottom: 20px;
-}
+                    contrainte:
+                        "CK_Produits_Stock",
 
-.bouton-test {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+                    resultatAttendu:
+                        "La modification du stock à -5 doit être refusée.",
 
-    min-height: 40px;
-    padding: 9px 15px;
+                    resultatObtenu:
+                        "SQL Server retourne une erreur de violation de contrainte CHECK (547).",
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon-petit);
+                    conclusion:
+                        "La contrainte empêche l'enregistrement d'un stock négatif."
+                },
 
-    background: var(--fond-carte);
-    color: var(--texte-secondaire);
+                "INT-04": {
+                    titre: "Quantité nulle et intégrité après rejet",
 
-    font-size: 13px;
-    font-weight: 650;
+                    contexte:
+                        "Une modification tente de remplacer la quantité commandée par zéro.",
 
-    cursor: pointer;
+                    objectif:
+                        "Vérifier que la modification est refusée et que la quantité initiale reste inchangée.",
 
-    transition:
-        background var(--transition),
-        color var(--transition),
-        border-color var(--transition);
-}
+                    contrainte:
+                        "CK_Lignes_Commande_Quantite",
 
-.bouton-test:hover {
-    background: var(--fond-interactif);
-    color: var(--texte-principal);
-}
+                    resultatAttendu:
+                        "La modification à zéro doit être refusée et la quantité doit rester égale à 1.",
 
-.bouton-test.actif,
-.bouton-test[aria-pressed="true"] {
-    background: var(--accent-fond);
-    color: var(--accent-clair);
-    border-color: var(--bordure-active);
-}
+                    resultatObtenu:
+                        "SQL Server retourne une erreur de contrainte CHECK (547). Une requête SELECT confirme ensuite que la quantité vaut toujours 1.",
 
+                    conclusion:
+                        "La modification invalide est rejetée et la donnée initiale est conservée."
+                }
+            }
+        },
 
-/* ==========================================================
-   09 — CONTENEUR DU CONTENU DYNAMIQUE
-   ========================================================== */
+        /* ----------------------------------------------
+           2.5. TEXTES COMMUNS
+           ---------------------------------------------- */
 
-#contenu-principal {
-    min-width: 0;
-}
+        commun: {
 
-.carte {
-    min-width: 0;
-    padding: 26px;
+            contexte: "Contexte métier",
+            objectif: "Objectif QA",
+            contrainte: "Contrainte testée",
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon);
+            resultatAttendu: "Résultat attendu",
+            resultatObtenu: "Résultat obtenu",
+            conclusion: "Conclusion du contrôle",
 
-    background: var(--fond-carte);
-}
+            capture: "Capture SQL Server Management Studio",
 
-.carte h2,
-.carte h3,
-.carte h4 {
-    color: var(--texte-principal);
-    line-height: 1.35;
-}
+            ouvrirCapture:
+                "Cliquer sur la capture pour l'afficher en taille réelle.",
 
-.carte h2 {
-    margin: 0 0 16px;
-    font-size: 22px;
-}
+            consulterScript: "Consulter le script SQL complet",
 
-.carte h3 {
-    margin: 0 0 12px;
-    font-size: 17px;
-}
+            projetComplet: "Accéder au projet complet",
 
-.carte h4 {
-    margin: 0 0 8px;
-    font-size: 14px;
-}
+            descriptionProjetComplet:
+                "Les captures présentent une sélection de scénarios représentatifs. L'ensemble des requêtes et des tests est disponible dans les scripts du projet sur GitHub.",
 
-.carte p {
-    margin: 0 0 14px;
-    color: var(--texte-secondaire);
-    line-height: 1.75;
-}
+            consulterGitHub: "Consulter le projet sur GitHub",
 
-.carte p:last-child {
-    margin-bottom: 0;
-}
+            piedPage:
+                "Portfolio QA — Démonstration SQL Server · Projet pédagogique"
+        }
+    },
 
 
-/* ==========================================================
-   10 — PRÉSENTATION DE LA BASE ET DES CINQ TABLES
-   ========================================================== */
+    /* ==================================================
+       3. ENGLISH VERSION
+       ================================================== */
 
-.grille-presentation {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    en: {
 
-    gap: 20px;
-    margin-bottom: 26px;
-}
+        /* ----------------------------------------------
+           3.1. HEADER AND NAVIGATION
+           ---------------------------------------------- */
 
-.bloc-presentation,
-.bloc-legende {
-    min-width: 0;
-    padding: 20px;
+        titreSite: "SQL — QA Demonstration",
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon-petit);
+        sousTitre:
+            "Educational project · QA_Ecommerce_Demo · SQL Server",
 
-    background: var(--fond-secondaire);
-}
+        modules: {
+            STRUCTURE: "Database structure",
+            EXTRACTION: "Data extraction and verification",
+            INTEGRITE: "Data integrity tests"
+        },
 
-.liste-tables,
-.liste-legende {
-    display: grid;
-    gap: 10px;
+        navigationModules: "SQL demonstration modules",
+        navigationTests: "QA scenarios for the selected module",
 
-    margin: 12px 0 0;
-    padding: 0;
+        /* ----------------------------------------------
+           3.2. MODULE 01: DATABASE STRUCTURE
+           ---------------------------------------------- */
 
-    list-style: none;
-}
+        structure: {
 
-.liste-tables li,
-.liste-legende li {
-    color: var(--texte-secondaire);
-    font-size: 13px;
-    line-height: 1.6;
-}
+            titre: "Database structure",
 
-.liste-tables strong,
-.liste-legende strong {
-    color: var(--texte-principal);
-}
+            introduction:
+                "This demonstration uses a fictional database representing an e-commerce business. It provides a practical environment for SQL verification in software testing.",
 
-.code-inline {
-    padding: 2px 6px;
+            titrePresentation: "Project overview",
 
-    border: 1px solid var(--bordure);
-    border-radius: 5px;
+            presentation:
+                "The QA_Ecommerce_Demo project was created using Microsoft SQL Server and SQL Server Management Studio (SSMS). It includes five related tables, a reference dataset and several constraints designed to maintain data consistency.",
 
-    background: var(--fond-interactif);
-    color: var(--accent-clair);
+            titreObjectif: "QA objective",
 
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 0.9em;
+            objectif:
+                "Use SQL to retrieve data, verify its consistency with business rules and check the behavior of database integrity constraints.",
 
-    overflow-wrap: anywhere;
-}
+            titreTables: "The five database tables",
 
+            tables: {
 
-/* ==========================================================
-   11 — DIAGRAMME RELATIONNEL
-   ========================================================== */
+                Clients: {
+                    titre: "Clients",
+                    description:
+                        "Customer information: identity and email address."
+                },
 
-.section-diagramme {
-    margin-top: 24px;
-}
+                Produits: {
+                    titre: "Products",
+                    description:
+                        "Product catalog: name, price and stock."
+                },
 
-.entete-section {
-    margin-bottom: 14px;
-}
+                Commandes: {
+                    titre: "Orders",
+                    description:
+                        "Customer orders, including their dates and statuses."
+                },
 
-.entete-section h3 {
-    margin-bottom: 6px;
-}
+                Lignes_Commande: {
+                    titre: "Order lines",
+                    description:
+                        "Ordered products, quantities and unit prices."
+                },
 
-.entete-section p {
-    margin-bottom: 0;
-}
+                Avis_Clients: {
+                    titre: "Customer reviews",
+                    description:
+                        "Reviews submitted by customers about products."
+                }
+            },
 
-.lien-diagramme {
-    display: block;
+            titreLegende: "Understanding the diagram",
 
-    width: 100%;
-    padding: 14px;
+            legende: [
+                "Primary keys identify individual records.",
+                "Foreign keys connect related tables.",
+                "Relationships help maintain data consistency."
+            ],
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon-petit);
+            titreDiagramme: "Relational diagram",
 
-    background: #ffffff;
+            descriptionDiagramme:
+                "Overview of the five tables and their relationships in SQL Server.",
 
-    cursor: zoom-in;
+            ouvrirDiagramme:
+                "Click the diagram to view the full-size image.",
 
-    transition:
-        border-color var(--transition),
-        box-shadow var(--transition);
-}
+            texteAlternatifDiagramme:
+                "Relational diagram of the QA_Ecommerce_Demo database showing five tables and their relationships.",
 
-.lien-diagramme:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-fond);
-}
+            titreScripts: "Project SQL scripts",
 
-.image-diagramme {
-    display: block;
+            descriptionScripts:
+                "The project's eight SQL scripts are available on GitHub. They document database creation, constraints, reference data and verification procedures.",
 
-    width: 100%;
-    height: auto;
-    max-height: 640px;
+            scripts: {
+                creation: "01 — Table creation",
+                contraintes: "02 — Integrity constraints",
+                donnees: "03 — Reference dataset",
+                index: "04 — Indexes",
+                gestion: "05 — Data management",
+                extraction: "06 — Data extraction",
+                complementaires: "07 — Additional SQL concepts",
+                tests: "08 — QA tests"
+            }
+        },
 
-    object-fit: contain;
-}
+        /* ----------------------------------------------
+           3.3. MODULE 02: DATA EXTRACTION
+           ---------------------------------------------- */
 
-.legende-image {
-    margin-top: 10px !important;
+        extraction: {
 
-    color: var(--texte-discret) !important;
+            titre: "Data extraction and verification",
 
-    font-size: 12px;
-    text-align: center;
-}
+            introduction:
+                "These scenarios demonstrate how SELECT queries can be used to verify stored information and check its consistency with business requirements.",
 
+            consigne:
+                "Select a scenario to view its SQL query, result and verification objective.",
 
-/* ==========================================================
-   12 — CAPTURES DES SCÉNARIOS D'EXTRACTION ET D'INTÉGRITÉ
-   ========================================================== */
+            scenarios: {
 
-.fiche-test {
-    display: grid;
-    gap: 20px;
-}
+                "EXT-01": {
+                    titre: "Order total verification",
 
-.entete-test {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-wrap: wrap;
+                    contexte:
+                        "An order contains several product lines.",
 
-    gap: 14px;
-}
+                    objectif:
+                        "Recalculate the order total using quantities and unit prices to verify its consistency.",
 
-.identifiant-test {
-    display: inline-flex;
-    align-items: center;
+                    resultatAttendu:
+                        "Order 1 should have a total amount of €139.70.",
 
-    padding: 5px 10px;
+                    resultatObtenu:
+                        "The query returns 139.70 for order 1.",
 
-    border: 1px solid var(--bordure-active);
-    border-radius: 6px;
+                    conclusion:
+                        "The calculated amount matches the expected result."
+                },
 
-    background: var(--accent-fond);
-    color: var(--accent-clair);
+                "EXT-02": {
+                    titre: "Order details verification",
 
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 12px;
-    font-weight: 700;
-}
+                    contexte:
+                        "A customer views the products included in an order.",
 
-.titre-test {
-    margin: 10px 0 0 !important;
+                    objectif:
+                        "Verify the relationship between order lines and registered products using an INNER JOIN.",
 
-    font-size: 20px !important;
-}
+                    resultatAttendu:
+                        "Order 1 should contain two lines: one mechanical keyboard and two wireless mice.",
 
-.description-test {
-    max-width: 950px;
+                    resultatObtenu:
+                        "Both products and their quantities are correctly retrieved.",
 
-    color: var(--texte-secondaire);
-    font-size: 14px;
-}
+                    conclusion:
+                        "The order lines match the registered products."
+                },
 
-.bloc-capture {
-    min-width: 0;
-    padding: 16px;
+                "EXT-03": {
+                    titre: "Customers without orders",
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon-petit);
+                    contexte:
+                        "Identify registered customers who have never placed an order.",
 
-    background: var(--fond-secondaire);
-}
+                    objectif:
+                        "Verify that customers without orders can be identified using LEFT JOIN and IS NULL.",
 
-.lien-capture {
-    display: block;
+                    resultatAttendu:
+                        "Customer Petit, ID 3, should appear without an associated order.",
 
-    width: fit-content;
-    max-width: 100%;
-    margin: 0 auto;
+                    resultatObtenu:
+                        "Customer Petit is returned with NULL in the id_commande column.",
 
-    cursor: zoom-in;
-}
+                    conclusion:
+                        "The query correctly identifies the customer without orders."
+                },
 
-.image-capture {
-    display: block;
+                "EXT-04": {
+                    titre: "Customers with multiple orders",
 
-    width: auto;
-    max-width: 100%;
-    height: auto;
+                    contexte:
+                        "Identify customers who have placed at least two orders.",
 
-    border: 1px solid #d0d7de;
-    border-radius: 4px;
+                    objectif:
+                        "Verify aggregation and filtering using COUNT, GROUP BY and HAVING.",
 
-    background: #ffffff;
-}
+                    resultatAttendu:
+                        "Customer Martin, ID 1, should appear with two orders.",
 
-.lien-capture:hover .image-capture {
-    border-color: var(--accent);
-}
+                    resultatObtenu:
+                        "The query returns customer Martin with a total of two orders.",
 
-.legende-capture {
-    margin: 12px 0 0 !important;
+                    conclusion:
+                        "Aggregation and filtering produce the expected result."
+                },
 
-    color: var(--texte-discret) !important;
+                "EXT-05": {
+                    titre: "Combined product catalog filters",
 
-    font-size: 12px;
-    text-align: center;
-}
+                    contexte:
+                        "Search for keyboards or mice priced at €50 or less.",
 
+                    objectif:
+                        "Verify the combination of AND and OR conditions when filtering products by name and price.",
 
-/* ==========================================================
-   13 — RÉSULTATS ET STATUTS DES TESTS
-   ========================================================== */
+                    resultatAttendu:
+                        "Only the wireless mouse priced at €29.90 should appear. The €79.90 keyboard should be excluded.",
 
-.resultat-test {
-    display: flex;
-    align-items: flex-start;
+                    resultatObtenu:
+                        "The query returns only the wireless mouse priced at €29.90.",
 
-    gap: 12px;
-    padding: 14px 16px;
+                    conclusion:
+                        "The filtering conditions correctly select the expected product."
+                }
+            }
+        },
 
-    border: 1px solid rgba(63, 185, 80, 0.35);
-    border-radius: var(--rayon-petit);
+        /* ----------------------------------------------
+           3.4. MODULE 03: DATA INTEGRITY TESTS
+           ---------------------------------------------- */
 
-    background: var(--succes-fond);
-}
+        integrite: {
 
-.resultat-test p {
-    margin: 0;
+            titre: "Data integrity tests",
 
-    color: var(--texte-principal);
-    font-size: 13px;
-}
+            introduction:
+                "These negative tests verify that SQL Server rejects operations that violate database constraints. An error message can therefore be the expected outcome of a successful test.",
 
-.resultat-test strong {
-    color: var(--succes);
-}
+            consigne:
+                "Select a test to view the attempted operation, the SQL Server rejection and, where applicable, the verification performed afterward.",
 
-.resultat-test.erreur-attendue {
-    border-color: rgba(248, 81, 73, 0.3);
-    background: var(--erreur-fond);
-}
+            scenarios: {
 
-.resultat-test.erreur-attendue strong {
-    color: #ff9b96;
-}
+                "INT-01": {
+                    titre: "Email address uniqueness",
 
+                    contexte:
+                        "A new customer attempts to register using an existing email address.",
 
-/* ==========================================================
-   14 — SECTION DES SCRIPTS SQL
-   ========================================================== */
+                    objectif:
+                        "Verify that the same email address cannot be assigned to multiple customers.",
 
-.section-scripts {
-    margin-top: 28px;
-    padding-top: 24px;
+                    contrainte:
+                        "UQ_Clients_Email",
 
-    border-top: 1px solid var(--bordure);
-}
+                    resultatAttendu:
+                        "SQL Server must reject the insertion.",
 
-.section-scripts h3 {
-    margin-bottom: 8px;
-}
+                    resultatObtenu:
+                        "SQL Server returns a UNIQUE KEY constraint violation (2627).",
 
-.grille-scripts {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    conclusion:
+                        "The uniqueness constraint prevents duplicate email addresses."
+                },
 
-    gap: 12px;
-    margin-top: 18px;
-}
+                "INT-02": {
+                    titre: "Order referential integrity",
 
-.lien-script {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+                    contexte:
+                        "An order is created using a customer ID that does not exist.",
 
-    min-width: 0;
-    min-height: 58px;
+                    objectif:
+                        "Verify that an order cannot reference a customer who is absent from the database.",
 
-    gap: 12px;
-    padding: 12px 16px;
+                    contrainte:
+                        "FK_Commandes_Clients",
 
-    border: 1px solid var(--bordure);
-    border-radius: var(--rayon-petit);
+                    resultatAttendu:
+                        "The insertion referencing customer 999 must be rejected.",
 
-    background: var(--fond-secondaire);
-    color: var(--texte-principal);
+                    resultatObtenu:
+                        "SQL Server returns a foreign key constraint violation (547).",
 
-    font-size: 13px;
-    font-weight: 600;
+                    conclusion:
+                        "The foreign key constraint protects the relationship between orders and customers."
+                },
 
-    overflow-wrap: anywhere;
+                "INT-03": {
+                    titre: "Negative stock rejection",
 
-    transition:
-        background var(--transition),
-        border-color var(--transition),
-        color var(--transition);
-}
+                    contexte:
+                        "An update attempts to assign a negative stock value to a product.",
 
-.lien-script:hover {
-    background: var(--fond-interactif);
-    border-color: var(--bordure-active);
-    color: var(--accent-clair);
-}
+                    objectif:
+                        "Verify that SQL Server rejects stock values below zero.",
 
-.nom-script {
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
+                    contrainte:
+                        "CK_Produits_Stock",
 
-.icone-lien {
-    flex-shrink: 0;
+                    resultatAttendu:
+                        "The update setting stock to -5 must be rejected.",
 
-    color: var(--accent);
+                    resultatObtenu:
+                        "SQL Server returns a CHECK constraint violation (547).",
 
-    font-size: 16px;
-}
+                    conclusion:
+                        "The constraint prevents negative stock values from being stored."
+                },
 
+                "INT-04": {
+                    titre: "Zero quantity and data preservation",
 
-/* ==========================================================
-   15 — LIENS COMPLÉMENTAIRES ET BOUTONS
-   ========================================================== */
+                    contexte:
+                        "An update attempts to change an ordered quantity to zero.",
 
-.actions-contenu {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+                    objectif:
+                        "Verify that the update is rejected and that the original quantity remains unchanged.",
 
-    gap: 12px;
-    margin-top: 22px;
-}
+                    contrainte:
+                        "CK_Lignes_Commande_Quantite",
 
-.bouton-lien {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+                    resultatAttendu:
+                        "The update must be rejected, and the quantity must remain equal to 1.",
 
-    min-height: 42px;
-    padding: 10px 16px;
+                    resultatObtenu:
+                        "SQL Server returns a CHECK constraint violation (547). A subsequent SELECT query confirms that the quantity is still 1.",
 
-    border: 1px solid var(--bordure-active);
-    border-radius: var(--rayon-petit);
+                    conclusion:
+                        "The invalid update is rejected and the original data is preserved."
+                }
+            }
+        },
 
-    background: var(--accent-fond);
-    color: var(--accent-clair);
+        /* ----------------------------------------------
+           3.5. SHARED TEXTS
+           ---------------------------------------------- */
 
-    font-size: 13px;
-    font-weight: 650;
+        commun: {
 
-    transition:
-        background var(--transition),
-        color var(--transition);
-}
+            contexte: "Business context",
+            objectif: "QA objective",
+            contrainte: "Tested constraint",
 
-.bouton-lien:hover {
-    background: rgba(56, 139, 253, 0.2);
-    color: #ffffff;
-}
+            resultatAttendu: "Expected result",
+            resultatObtenu: "Actual result",
+            conclusion: "Verification conclusion",
 
+            capture: "SQL Server Management Studio screenshot",
 
-/* ==========================================================
-   16 — PIED DE PAGE
-   ========================================================== */
+            ouvrirCapture:
+                "Click the screenshot to view it at full size.",
 
-.pied-page {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+            consulterScript: "View the complete SQL script",
 
-    gap: 12px;
-    margin-top: 28px;
-    padding-top: 20px;
+            projetComplet: "Explore the complete project",
 
-    border-top: 1px solid var(--bordure);
-}
+            descriptionProjetComplet:
+                "The screenshots showcase a selection of representative scenarios. All queries and tests are available in the project's SQL scripts on GitHub.",
 
-#texte-pied-page {
-    margin: 0;
+            consulterGitHub: "View project on GitHub",
 
-    color: var(--texte-discret);
-    font-size: 12px;
-}
-
-#lien-depot {
-    font-size: 12px;
-    font-weight: 600;
-}
-
-
-/* ==========================================================
-   17 — ADAPTATION AUX ÉCRANS INTERMÉDIAIRES
-   ========================================================== */
-
-@media (max-width: 850px) {
-
-    .page-sql {
-        padding: 24px 18px;
+            piedPage:
+                "QA Portfolio — SQL Server Demonstration · Educational project"
+        }
     }
-
-    .navigation-modules {
-        gap: 8px;
-    }
-
-    .bouton-module {
-        gap: 8px;
-        padding: 12px;
-        font-size: 12px;
-    }
-
-    .grille-presentation {
-        grid-template-columns: 1fr;
-    }
-
-    .grille-scripts {
-        grid-template-columns: 1fr;
-    }
-
-    .carte {
-        padding: 20px;
-    }
-
-}
+};
 
 
-/* ==========================================================
-   18 — ADAPTATION AUX MOBILES ET IFRAMES ÉTROITES
-   ========================================================== */
+/* ==================================================
+   4. DISPONIBILITÉ DES TRADUCTIONS
+   ==================================================
 
-@media (max-width: 600px) {
+   La constante traductionsSQL est déclarée dans
+   le contexte global du script classique.
 
-    .page-sql {
-        padding: 18px 12px;
-    }
+   index.html doit charger les fichiers dans cet ordre :
 
-    .entete {
-        margin-bottom: 22px;
-    }
+   1. traductions.js
+   2. index.js
 
-    .navigation-modules {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
+   Les deux scripts doivent utiliser defer.
 
-    .bouton-module {
-        min-height: 48px;
-        padding: 10px 14px;
-        font-size: 13px;
-    }
+   Exemple :
+   <script src="traductions.js" defer></script>
+   <script src="index.js" defer></script>
 
-    .presentation-module {
-        padding: 18px;
-    }
-
-    #titre-module {
-        font-size: 19px;
-    }
-
-    .carte {
-        padding: 14px;
-    }
-
-    .bloc-presentation,
-    .bloc-legende {
-        padding: 14px;
-    }
-
-    .bloc-capture {
-        padding: 8px;
-    }
-
-    .navigation-tests {
-        gap: 8px;
-    }
-
-    .bouton-test {
-        flex: 1 1 auto;
-        padding: 8px 12px;
-    }
-
-    .pied-page {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-}
-
-
-/* ==========================================================
-   19 — ACCESSIBILITÉ : RÉDUCTION DES ANIMATIONS
-   ========================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-    }
-
-}
+   ================================================== */
