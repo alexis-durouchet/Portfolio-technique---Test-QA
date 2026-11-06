@@ -1,4 +1,3 @@
-
 "use strict";
 
 /* ==================================================
@@ -9,17 +8,17 @@
    Organisation actuelle :
 
    outils-tools/
-       SQL/
-           index.html
-           index.css
-           traductions.js
-           index.js
+        SQL/
+            index.html
+            index.css
+            traductions.js
+            index.js
 
    assets/
-       SQL/
-           Arbo-diag.png
-           EXT-01.png à EXT-05.png
-           INT-01.png à INT-04.png
+        SQL/
+            Arbo-diag.png
+            EXT-01.png à EXT-05.png
+            INT-01.png à INT-04.png
 
    Les chemins des images sont relatifs à index.html.
 */
@@ -1328,8 +1327,8 @@ function initialiserBoutonsSQL() {
    Le message attendu est :
 
    {
-       type: "CHANGER_LANGUE",
-       langue: "fr" ou "en"
+        type: "CHANGER_LANGUE",
+        langue: "fr" ou "en"
    }
 */
 
