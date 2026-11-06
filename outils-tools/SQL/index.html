@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -8,10 +7,7 @@
          ================================================== -->
 
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
           content="Démonstration de tests QA SQL sur une base de données e-commerce fictive : structure, extraction de données et contrôles d'intégrité.">
 
@@ -19,25 +15,6 @@
 
     <!-- Feuille de style -->
     <link rel="stylesheet" href="index.css">
-
-     <!-- ==================================================
-         2. FICHIERS JAVASCRIPT
-         ==================================================
-
-         traductions.js :
-         Contient les textes français et anglais.
-
-         index.js :
-         Gère la navigation, les scénarios QA,
-         les captures et le changement de langue.
-
-         Les deux fichiers sont nécessaires au
-         fonctionnement de la démonstration.
-
-         IMPORTANT :
-         Charger traductions.js AVANT index.js.
-         ================================================== -->
-
 </head>
 
 <body>
@@ -100,25 +77,19 @@
                     data-module="STRUCTURE"
                     class="actif"
                     aria-pressed="true">
-
                 01 — Structure de la base
-
             </button>
 
             <button type="button"
                     data-module="EXTRACTION"
                     aria-pressed="false">
-
                 02 — Extraction et contrôle
-
             </button>
 
             <button type="button"
                     data-module="INTEGRITE"
                     aria-pressed="false">
-
                 03 — Tests d'intégrité
-
             </button>
 
         </nav>
@@ -126,19 +97,6 @@
         <!-- ==================================================
              6. NAVIGATION DES CAS D'USAGE
              ================================================== -->
-
-        <!--
-             Cette navigation sera alimentée par index.js.
-
-             MODULE STRUCTURE :
-             Aucun cas d'usage à sélectionner.
-
-             MODULE EXTRACTION :
-             EXT-01 à EXT-05.
-
-             MODULE INTÉGRITÉ :
-             INT-01 à INT-04.
-        -->
 
         <nav id="navigation-tests"
              aria-label="Cas d'usage du module sélectionné"
@@ -149,41 +107,11 @@
              7. AFFICHAGE DU CONTENU
              ================================================== -->
 
-        <!--
-             Cette section sera alimentée dynamiquement
-             par index.js.
-
-             STRUCTURE :
-             - Présentation de la base de données
-             - Description des cinq tables
-             - Diagramme relationnel Arbo-diag.png
-             - Accès aux huit scripts SQL
-
-             EXTRACTION :
-             - Présentation des contrôles QA
-             - Sélection des scénarios EXT-01 à EXT-05
-             - Objectifs et résultats attendus
-             - Captures SSMS correspondantes
-             - Accès au script SQL complet
-
-             INTÉGRITÉ :
-             - Présentation des tests négatifs
-             - Sélection des scénarios INT-01 à INT-04
-             - Contraintes vérifiées
-             - Résultats attendus et obtenus
-             - Captures SSMS correspondantes
-             - Accès au script SQL complet
-        -->
-
         <section id="contenu"
                  class="carte"
                  aria-live="polite"
                  aria-label="Contenu de la démonstration SQL">
-
-            <!--
-                 Contenu généré par JavaScript.
-            -->
-
+            <!-- Contenu généré dynamiquement par index.js -->
         </section>
 
     </main>
@@ -193,11 +121,16 @@
          ================================================== -->
 
     <footer id="pied-page">
-
-        Portfolio QA — Démonstration SQL ·
-        Base de données fictive QA_Ecommerce_Demo
-
+        Portfolio QA — Démonstration SQL · Base de données fictive QA_Ecommerce_Demo
     </footer>
+
+    <!-- ==================================================
+         2. FICHIERS JAVASCRIPT
+         ==================================================
+         Chargement de traductions.js AVANT index.js
+         ================================================== -->
+    <script src="traductions.js"></script>
+    <script src="index.js"></script>
 
 </body>
 
