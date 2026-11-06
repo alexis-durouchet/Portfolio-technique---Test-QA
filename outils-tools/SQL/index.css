@@ -1,4 +1,3 @@
-
 /* ==================================================
    1. CONFIGURATION GÉNÉRALE
    ================================================== */
@@ -261,8 +260,6 @@ main {
    8. PRÉSENTATION DE LA BASE SQL
    ================================================== */
 
-/* Présentation et légende des relations */
-
 .presentation-base {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -286,8 +283,6 @@ main {
 .bloc-legende h3 {
     margin-top: 0;
 }
-
-/* Liste des cinq tables */
 
 .liste-tables {
     display: grid;
@@ -488,8 +483,6 @@ main {
     border-radius: 6px;
 }
 
-/* Liens des captures */
-
 .carte a {
     color: var(--accent);
     text-decoration: none;
@@ -499,8 +492,6 @@ main {
     text-decoration: underline;
 }
 
-/* Captures cliquables */
-
 .carte a img {
     transition: border-color 0.2s;
 }
@@ -508,8 +499,6 @@ main {
 .carte a:hover img {
     border-color: var(--accent);
 }
-
-/* Conteneur des captures de scénarios */
 
 .capture-scenario {
     margin: 24px 0;
@@ -540,8 +529,6 @@ main {
    13. ÉLÉMENTS COMPLÉMENTAIRES
    ================================================== */
 
-/* Étiquettes de statut */
-
 .statut {
     display: inline-block;
 
@@ -556,8 +543,6 @@ main {
     border: 1px solid var(--succes);
     border-radius: 6px;
 }
-
-/* Bloc d'accès au projet complet */
 
 .acces-projet {
     margin-top: 28px;
@@ -597,15 +582,11 @@ footer {
    15. INTERACTIONS ET ACCESSIBILITÉ
    ================================================== */
 
-/* Focus visible au clavier */
-
 button:focus-visible,
 a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
 }
-
-/* Respect des éléments masqués */
 
 [hidden] {
     display: none !important;
@@ -656,8 +637,6 @@ a:focus-visible {
         margin: 16px auto 32px;
     }
 
-    /* Navigation des modules */
-
     #navigation-modules {
         gap: 8px;
     }
@@ -666,8 +645,6 @@ a:focus-visible {
         padding: 9px 12px;
         font-size: 0.85rem;
     }
-
-    /* Navigation des cas d'usage */
 
     #navigation-tests {
         gap: 8px;
@@ -678,8 +655,6 @@ a:focus-visible {
         font-size: 0.85rem;
     }
 
-    /* Zone de contenu */
-
     .carte {
         padding: 18px;
     }
@@ -688,31 +663,21 @@ a:focus-visible {
         font-size: 1.2rem;
     }
 
-    /* Sélecteur de langue */
-
     .langues button {
         padding: 7px 12px;
     }
-
-    /* Présentation des tables */
 
     .liste-tables {
         grid-template-columns: 1fr;
     }
 
-    /* Liens vers les scripts */
-
     .liste-scripts {
         grid-template-columns: 1fr;
     }
 
-    /* Informations des scénarios */
-
     .informations-scenario {
         grid-template-columns: 1fr;
     }
-
-    /* Captures */
 
     .capture-scenario {
         margin: 18px 0;
