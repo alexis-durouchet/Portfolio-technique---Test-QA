@@ -1,7 +1,7 @@
 "use strict";
 
 /* ==================================================
-   1. CONFIGURATION DE LA DÉMONSTRATION SQL
+   1. CONFIGURATION DE LA DÉMONSTRATION SQL 
    ================================================== */
 
 /*
