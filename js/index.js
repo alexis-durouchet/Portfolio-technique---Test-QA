@@ -11,7 +11,7 @@
 
 const langages = [
     { nom: "Python", actif: false, page: "langages-languages/python/index.html" },
-    { nom: "SQL", actif: false, page: "langages-languages/sql/index.html" },
+    { nom: "SQL", actif: actif, page: "outils-tools/SQL/index.html" },
     { nom: "HTML", actif: false, page: "langages-languages/html/index.html" },
     { nom: "CSS", actif: false, page: "langages-languages/css/index.html" },
     { nom: "JavaScript", actif: false, page: "langages-languages/javascript/index.html" }
