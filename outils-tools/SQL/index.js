@@ -44,7 +44,7 @@ const configurationSQL = {
 
        Ne pas renseigner une adresse approximative.
     */
-    dossierScripts: "",
+    dossierScripts: "scripts",
 
     // Langue utilisée si aucune préférence n'existe.
     langueDefaut: "fr"
@@ -311,7 +311,8 @@ function obtenirLienScriptSQL(nomFichier) {
     const dossier =
         configurationSQL.dossierScripts.replace(/\/+$/, "");
 
-    return dossier + "/" + encodeURIComponent(nomFichier);
+    return dossier + "/scripts.html?script=" +
+        encodeURIComponent(nomFichier);
 
 }
 
