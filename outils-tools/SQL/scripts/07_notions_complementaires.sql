@@ -1,0 +1,37 @@
+-- ============================================================
+-- NOTIONS COMPLEMENTAIRES : SELF JOIN
+--
+-- Objectif pedagogique :
+-- Comprendre le fonctionnement d'une auto-jointure SQL.
+--
+-- Exemple theorique :
+-- Une table Employes contient :
+-- id_employe, nom, id_manager.
+--
+-- L'objectif est d'afficher chaque employe ainsi que
+-- le nom de son responsable.
+--
+-- E = Employes (role de l'employe)
+-- M = Employes (role du responsable)
+--
+-- Requete illustrative (NON EXECUTABLE) :
+--
+-- SELECT
+--     E.nom AS employe,
+--     M.nom AS responsable
+-- FROM dbo.Employes AS E
+-- LEFT JOIN dbo.Employes AS M
+--     ON E.id_manager = M.id_employe;
+--
+-- Pourquoi LEFT JOIN ?
+-- Pour conserver les employes qui n'ont pas de responsable.
+-- Avec INNER JOIN, ces employes seraient exclus.
+--
+-- Application QA :
+-- Verifier la coherence des relations hierarchiques.
+--
+-- Limite :
+-- La table Employes n'existe pas dans QA_Ecommerce_Demo.
+-- Cet exemple est uniquement pedagogique.
+-- ============================================================
+
