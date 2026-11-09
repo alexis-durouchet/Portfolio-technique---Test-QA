@@ -1,37 +1,90 @@
 
 "use strict";
 
-// Liste des fichiers SQL présents dans ce dossier.
+// Configuration des huit scripts SQL.
 const scripts = [
-    { titre: "01 — Création des tables", fichier: "01_creation_tables.sql" },
-    { titre: "02 — Contraintes", fichier: "02_contraintes.sql" },
-    { titre: "03 — Jeu de données", fichier: "03_jeu_donnees.sql" },
-    { titre: "04 — Index", fichier: "04_index.sql" },
-    { titre: "05 — Gestion des données", fichier: "05_gestion_donnees.sql" },
-    { titre: "06 — Extraction des données", fichier: "06_extraction_donnees.sql" },
-    { titre: "07 — Notions complémentaires", fichier: "07_notions_complementaires.sql" },
-    { titre: "08 — Tests QA", fichier: "08_tests_qa.sql" }
+    "01_creation_tables.sql",
+    "02_contraintes.sql",
+    "03_jeu_donnees.sql",
+    "04_index.sql",
+    "05_gestion_donnees.sql",
+    "06_extraction_donnees.sql",
+    "07_notions_complementaires.sql",
+    "08_tests_qa.sql"
 ];
 
 const liste = document.getElementById("liste-scripts");
 const titre = document.getElementById("titre-script");
 const nomFichier = document.getElementById("nom-fichier");
 const contenu = document.getElementById("contenu-script");
+
+let langueActuelle = "fr";
+let scriptActuel = -1;
 let chargementActuel = 0;
 
-async function afficherScript(script, bouton) {
-    const chargement = ++chargementActuel;
+// Applique les traductions sans modifier le code SQL affiché.
+function changerLangue(langue) {
+    if (!traductionsScripts[langue]) return;
 
-    document.querySelectorAll(".bouton-script").forEach(element => {
-        element.setAttribute("aria-pressed", String(element === bouton));
+    langueActuelle = langue;
+    document.documentElement.lang = langue;
+    document.title = traductionsScripts[langue].titre;
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        if (element.id === "titre-script" && scriptActuel !== -1) return;
+        if (element.id === "contenu-script" && scriptActuel !== -1) return;
+
+        const cle = element.dataset.i18n;
+        const texte = traductionsScripts[langue][cle];
+
+        if (texte !== undefined) {
+            element.textContent = texte;
+        }
     });
 
-    titre.textContent = script.titre;
-    nomFichier.textContent = script.fichier;
-    contenu.textContent = "Chargement du script…";
+    document.querySelectorAll("[data-i18n-aria-label]").forEach(element => {
+        const cle = element.dataset.i18nAriaLabel;
+        element.setAttribute("aria-label", traductionsScripts[langue][cle]);
+    });
+
+    document.querySelectorAll("[data-lang]").forEach(bouton => {
+        bouton.setAttribute(
+            "aria-pressed",
+            String(bouton.dataset.lang === langue)
+        );
+    });
+
+    // Met à jour les intitulés du menu.
+    Array.from(liste.children).forEach((bouton, index) => {
+        bouton.textContent = traductionsScripts[langue].scripts[index];
+    });
+
+    if (scriptActuel !== -1) {
+        titre.textContent = traductionsScripts[langue].scripts[scriptActuel];
+    }
 
     try {
-        const reponse = await fetch(encodeURIComponent(script.fichier));
+        localStorage.setItem("languePortfolio", langue);
+    } catch (erreur) {
+        // Le stockage est facultatif.
+    }
+}
+
+// Charge le fichier SQL sélectionné.
+async function afficherScript(index) {
+    const chargement = ++chargementActuel;
+    scriptActuel = index;
+
+    Array.from(liste.children).forEach((bouton, position) => {
+        bouton.setAttribute("aria-pressed", String(position === index));
+    });
+
+    titre.textContent = traductionsScripts[langueActuelle].scripts[index];
+    nomFichier.textContent = scripts[index];
+    contenu.textContent = traductionsScripts[langueActuelle].chargement;
+
+    try {
+        const reponse = await fetch(scripts[index]);
 
         if (!reponse.ok) {
             throw new Error(`HTTP ${reponse.status}`);
@@ -44,27 +97,37 @@ async function afficherScript(script, bouton) {
         }
     } catch (erreur) {
         if (chargement === chargementActuel) {
-            contenu.textContent = "Impossible de charger ce fichier SQL. Vérifiez sa présence sur GitHub Pages.";
+            contenu.textContent = traductionsScripts[langueActuelle].erreurChargement;
             console.error("Erreur de chargement SQL :", erreur);
         }
     }
 }
 
-scripts.forEach(script => {
+// Génère les boutons de navigation.
+scripts.forEach((fichier, index) => {
     const bouton = document.createElement("button");
 
     bouton.type = "button";
     bouton.className = "bouton-script";
-    bouton.textContent = script.titre;
     bouton.setAttribute("aria-pressed", "false");
 
-    bouton.addEventListener("click", () => {
-        afficherScript(script, bouton);
-    });
-
+    bouton.addEventListener("click", () => afficherScript(index));
     liste.appendChild(bouton);
 });
 
-// Affiche le premier script dès l'ouverture.
-afficherScript(scripts[0], liste.firstElementChild);
+// Active le sélecteur FR/EN.
+document.querySelectorAll("[data-lang]").forEach(bouton => {
+    bouton.addEventListener("click", () => changerLangue(bouton.dataset.lang));
+});
 
+// Récupère la langue du portfolio.
+let langueEnregistree = "fr";
+
+try {
+    langueEnregistree = localStorage.getItem("languePortfolio") || "fr";
+} catch (erreur) {
+    // Français par défaut.
+}
+
+changerLangue(langueEnregistree);
+afficherScript(0);
