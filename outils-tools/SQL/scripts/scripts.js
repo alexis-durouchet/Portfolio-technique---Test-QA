@@ -130,4 +130,10 @@ try {
 }
 
 changerLangue(langueEnregistree);
-afficherScript(0);
+
+// Sélection du script demandé depuis l'URL.
+const parametres = new URLSearchParams(window.location.search);
+const fichierDemande = parametres.get("script");
+const indexDemande = scripts.indexOf(fichierDemande);
+
+afficherScript(indexDemande !== -1 ? indexDemande : 0);
