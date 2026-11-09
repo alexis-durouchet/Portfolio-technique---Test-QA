@@ -112,5 +112,45 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
     .conteneur { width: calc(100% - 24px); margin-top: 16px; }
     .menu-scripts, .lecture-script { padding: 14px; }
     #liste-scripts { grid-template-columns: 1fr; }
+    
+/* Sélecteur de langue FR/EN */
+
+.langues {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.langues button {
+    padding: 7px 14px;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+
+    color: #c9d1d9;
+    background-color: #21262d;
+
+    border: 1px solid #30363d;
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.langues button:hover {
+    background-color: #30363d;
+}
+
+.langues button[aria-pressed="true"] {
+    color: #f0f6fc;
+    background-color: #1f3b5c;
+    border-color: #58a6ff;
+}
+
+.langues button:focus-visible {
+    outline: 2px solid #58a6ff;
+    outline-offset: 3px;
+}
+
 }
 
