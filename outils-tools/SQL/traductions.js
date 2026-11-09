@@ -1,5 +1,5 @@
 /* ==================================================
-   1. TRADUCTIONS DE LA DÉMONSTRATION SQL
+   1. TRADUCTIONS DE LA DÉMONSTRATION SQL 
    ==================================================
 
    Projet : QA_Ecommerce_Demo
